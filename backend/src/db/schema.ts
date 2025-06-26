@@ -62,7 +62,7 @@ export const tournament = pgTable('tournament', {
   date: date('date'),
   time: time('time'),
   created_at: timestamp('created_at').notNull().defaultNow(),
-  udpated_at: timestamp('updated_at').notNull().defaultNow(),
+  updated_at: timestamp('updated_at').notNull().defaultNow(),
 });
 
 export const tournamentEvent = pgTable('tournament_event', {
@@ -84,7 +84,7 @@ export const tournamentEvent = pgTable('tournament_event', {
   max_age: integer('max_age'),
   unrated_may_advance: boolean('unrated_may_advance').notNull().default(true),
   created_at: timestamp('created_at').notNull().defaultNow(),
-  udpated_at: timestamp('updated_at').notNull().defaultNow(),
+  updated_at: timestamp('updated_at').notNull().defaultNow(),
 });
 
 export const tournamentPlayer = pgTable('tournament_player', {
@@ -100,7 +100,7 @@ export const tournamentPlayer = pgTable('tournament_player', {
     .notNull()
     .references(() => tournament.id),
   created_at: timestamp('created_at').notNull().defaultNow(),
-  udpated_at: timestamp('updated_at').notNull().defaultNow(),
+  updated_at: timestamp('updated_at').notNull().defaultNow(),
 });
 
 export const tournamentTable = pgTable('tournament_table', {
@@ -110,7 +110,7 @@ export const tournamentTable = pgTable('tournament_table', {
     .notNull()
     .references(() => tournament.id),
   created_at: timestamp('created_at').notNull().defaultNow(),
-  udpated_at: timestamp('updated_at').notNull().defaultNow(),
+  updated_at: timestamp('updated_at').notNull().defaultNow(),
 });
 
 export const eventPlayer = pgTable('event_player', {
@@ -123,7 +123,7 @@ export const eventPlayer = pgTable('event_player', {
     .references(() => tournamentPlayer.id),
   has_paid: boolean('has_paid').notNull().default(false),
   created_at: timestamp('created_at').notNull().defaultNow(),
-  udpated_at: timestamp('updated_at').notNull().defaultNow(),
+  updated_at: timestamp('updated_at').notNull().defaultNow(),
 });
 
 export const eventGroup = pgTable('event_group', {
@@ -133,7 +133,7 @@ export const eventGroup = pgTable('event_group', {
     .references(() => tournamentEvent.id),
   number: integer('number').notNull(),
   created_at: timestamp('created_at').notNull().defaultNow(),
-  udpated_at: timestamp('updated_at').notNull().defaultNow(),
+  updated_at: timestamp('updated_at').notNull().defaultNow(),
 });
 
 export const groupPlayer = pgTable('group_player', {
@@ -145,7 +145,7 @@ export const groupPlayer = pgTable('group_player', {
     .notNull()
     .references(() => eventPlayer.id),
   created_at: timestamp('created_at').notNull().defaultNow(),
-  udpated_at: timestamp('updated_at').notNull().defaultNow(),
+  updated_at: timestamp('updated_at').notNull().defaultNow(),
 });
 
 export const groupMatch = pgTable('group_match', {
@@ -168,7 +168,7 @@ export const groupMatch = pgTable('group_match', {
   date: date('date'),
   time: time('time'),
   created_at: timestamp('created_at').notNull().defaultNow(),
-  udpated_at: timestamp('updated_at').notNull().defaultNow(),
+  updated_at: timestamp('updated_at').notNull().defaultNow(),
   started_at: timestamp('started_at').notNull().defaultNow(),
   completed_at: timestamp('completed_at').notNull().defaultNow(),
 });
@@ -182,7 +182,7 @@ export const groupMatchTable = pgTable('group_match_table', {
     .notNull()
     .references(() => groupMatch.id),
   created_at: timestamp('created_at').notNull().defaultNow(),
-  udpated_at: timestamp('updated_at').notNull().defaultNow(),
+  updated_at: timestamp('updated_at').notNull().defaultNow(),
 });
 
 export const eventDraw = pgTable('event_draw', {
@@ -193,7 +193,7 @@ export const eventDraw = pgTable('event_draw', {
   date: date('date'),
   time: time('time'),
   created_at: timestamp('created_at').notNull().defaultNow(),
-  udpated_at: timestamp('updated_at').notNull().defaultNow(),
+  updated_at: timestamp('updated_at').notNull().defaultNow(),
 });
 
 export const drawPlayer = pgTable('draw_player', {
@@ -205,7 +205,7 @@ export const drawPlayer = pgTable('draw_player', {
     .notNull()
     .references(() => eventPlayer.id),
   created_at: timestamp('created_at').notNull().defaultNow(),
-  udpated_at: timestamp('updated_at').notNull().defaultNow(),
+  updated_at: timestamp('updated_at').notNull().defaultNow(),
 });
 
 export const drawMatch = pgTable('draw_match', {
@@ -225,7 +225,7 @@ export const drawMatch = pgTable('draw_match', {
   round: integer('round').notNull(),
   sequence: integer('sequence'),
   created_at: timestamp('created_at').notNull().defaultNow(),
-  udpated_at: timestamp('updated_at').notNull().defaultNow(),
+  updated_at: timestamp('updated_at').notNull().defaultNow(),
   started_at: timestamp('started_at').notNull().defaultNow(),
   completed_at: timestamp('completed_at').notNull().defaultNow(),
 });
@@ -239,5 +239,5 @@ export const drawMatchTable = pgTable('draw_match_table', {
     .notNull()
     .references(() => drawMatch.id),
   created_at: timestamp('created_at').notNull().defaultNow(),
-  udpated_at: timestamp('updated_at').notNull().defaultNow(),
+  updated_at: timestamp('updated_at').notNull().defaultNow(),
 });
