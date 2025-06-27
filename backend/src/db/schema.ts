@@ -44,6 +44,12 @@ export const eventFormatEnum = pgEnum('event_format', [
   'handicap',
 ]);
 
+export const groupStatusEnum = pgEnum('group_status', [
+  'upcoming',
+  'in_progress',
+  'finished',
+]);
+
 export const matchStatusEnum = pgEnum('match_status', [
   'upcoming',
   'ready',
@@ -132,12 +138,16 @@ export const eventGroup = pgTable('event_group', {
     .notNull()
     .references(() => tournamentEvent.id),
   number: integer('number').notNull(),
+  date: date('date'),
+  time: time('time'),
+  status: groupStatusEnum('status').notNull().default('upcoming'),
   created_at: timestamp('created_at').notNull().defaultNow(),
   updated_at: timestamp('updated_at').notNull().defaultNow(),
 });
 
 export const groupPlayer = pgTable('group_player', {
   id: serial('id').primaryKey(),
+  position: integer('position'),
   event_group_id: integer('event_group_id')
     .notNull()
     .references(() => eventGroup.id),
@@ -165,8 +175,6 @@ export const groupMatch = pgTable('group_match', {
   forfeited_player_id: integer('forfeited_player_id').references(
     () => groupPlayer.id,
   ),
-  date: date('date'),
-  time: time('time'),
   created_at: timestamp('created_at').notNull().defaultNow(),
   updated_at: timestamp('updated_at').notNull().defaultNow(),
   started_at: timestamp('started_at').notNull().defaultNow(),
