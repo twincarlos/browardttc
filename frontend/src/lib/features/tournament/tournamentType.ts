@@ -7,7 +7,6 @@ export interface Tournament {
   registration_deadline?: string
   rating_cutoff?: string
   date?: string
-  time?: string
   created_at: string
   updated_at: string
 }

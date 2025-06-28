@@ -1,9 +1,7 @@
-import TournamentExample from "@/components/TournamentExample";
-
 export default function Home() {
   return (
     <div>
-      <TournamentExample />
+      <h1>Hello World</h1>
     </div>
   );
 }

@@ -66,7 +66,6 @@ export const tournament = pgTable('tournament', {
   registration_deadline: date('registration_deadline'),
   rating_cutoff: date('rating_cutoff'),
   date: date('date'),
-  time: time('time'),
   created_at: timestamp('created_at').notNull().defaultNow(),
   updated_at: timestamp('updated_at').notNull().defaultNow(),
 });
@@ -220,6 +219,7 @@ export const drawMatch = pgTable('draw_match', {
   id: serial('id').primaryKey(),
   draw_player1_id: integer('draw_player1_id').references(() => drawPlayer.id),
   draw_player2_id: integer('draw_player2_id').references(() => drawPlayer.id),
+  has_bye: boolean('has_bye').notNull().default(false),
   score: json('score').notNull(),
   winner_id: integer('winner_id').references(() => drawPlayer.id),
   status: matchStatusEnum('status').notNull().default('upcoming'),
@@ -240,7 +240,7 @@ export const drawMatch = pgTable('draw_match', {
 
 export const drawMatchTable = pgTable('draw_match_table', {
   id: serial('id').primaryKey(),
-  table_id: integer('table_id')
+  tournament_table_id: integer('tournament_table_id')
     .notNull()
     .references(() => tournamentTable.id),
   draw_match_id: integer('draw_match_id')
