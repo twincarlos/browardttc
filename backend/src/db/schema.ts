@@ -165,9 +165,9 @@ export const groupMatch = pgTable('group_match', {
   group_player2_id: integer('group_player2_id')
     .notNull()
     .references(() => groupPlayer.id),
-  score: json('score').notNull(),
+  score: json('score'),
   winner_id: integer('winner_id').references(() => groupPlayer.id),
-  sequence: integer('sequence'),
+  sequence: integer('sequence').notNull(),
   status: matchStatusEnum('status').notNull().default('upcoming'),
   player1_ready: boolean('player1_ready').notNull().default(false),
   player2_ready: boolean('player2_ready').notNull().default(false),
@@ -176,8 +176,8 @@ export const groupMatch = pgTable('group_match', {
   ),
   created_at: timestamp('created_at').notNull().defaultNow(),
   updated_at: timestamp('updated_at').notNull().defaultNow(),
-  started_at: timestamp('started_at').notNull().defaultNow(),
-  completed_at: timestamp('completed_at').notNull().defaultNow(),
+  started_at: timestamp('started_at'),
+  completed_at: timestamp('completed_at'),
 });
 
 export const groupMatchTable = pgTable('group_match_table', {
@@ -220,7 +220,7 @@ export const drawMatch = pgTable('draw_match', {
   draw_player1_id: integer('draw_player1_id').references(() => drawPlayer.id),
   draw_player2_id: integer('draw_player2_id').references(() => drawPlayer.id),
   has_bye: boolean('has_bye').notNull().default(false),
-  score: json('score').notNull(),
+  score: json('score'),
   winner_id: integer('winner_id').references(() => drawPlayer.id),
   status: matchStatusEnum('status').notNull().default('upcoming'),
   player1_ready: boolean('player1_ready').notNull().default(false),
@@ -231,11 +231,11 @@ export const drawMatch = pgTable('draw_match', {
   date: date('date'),
   time: time('time'),
   round: integer('round').notNull(),
-  sequence: integer('sequence'),
+  sequence: integer('sequence').notNull(),
   created_at: timestamp('created_at').notNull().defaultNow(),
   updated_at: timestamp('updated_at').notNull().defaultNow(),
-  started_at: timestamp('started_at').notNull().defaultNow(),
-  completed_at: timestamp('completed_at').notNull().defaultNow(),
+  started_at: timestamp('started_at'),
+  completed_at: timestamp('completed_at'),
 });
 
 export const drawMatchTable = pgTable('draw_match_table', {

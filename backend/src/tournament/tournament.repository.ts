@@ -74,19 +74,19 @@ export class TournamentRepository {
     ]);
 
     return {
-      tournament: tournamentResult,
+      tournament: tournamentResult[0],
       tournamentPlayers: tournamentPlayersResult,
       tournamentEvents: tournamentEventsResult,
       tournamentTables: tournamentTablesResult,
-      eventPlayers: eventPlayersResult,
-      eventGroups: eventGroupsResult,
-      eventDraw: eventDrawResult,
-      groupPlayers: groupPlayersResult,
-      drawPlayers: drawPlayersResult,
-      groupMatches: groupMatchesResult,
-      drawMatches: drawMatchesResult,
-      groupMatchTables: groupMatchTablesResult,
-      drawMatchTables: drawMatchTablesResult
+      eventPlayers: eventPlayersResult.map(e => e.event_player),
+      eventGroups: eventGroupsResult.map(e => e.event_group),
+      eventDraw: eventDrawResult.map(e => e.event_draw),
+      groupPlayers: groupPlayersResult.map(e => e.group_player),
+      drawPlayers: drawPlayersResult.map(e => e.draw_player),
+      groupMatches: groupMatchesResult.map(e => e.group_match),
+      drawMatches: drawMatchesResult.map(e => e.draw_match),
+      groupMatchTables: groupMatchTablesResult.map(e => e.group_match_table),
+      drawMatchTables: drawMatchTablesResult.map(e => e.draw_match_table)
     }
   }
 
