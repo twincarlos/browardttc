@@ -3,11 +3,11 @@ import { TournamentPlayer } from '../../types/tournamentPlayerType'
 import { tournamentApi } from '../apis/tournamentApi'
 
 interface TournamentPlayerState {
-  tournamentPlayers: TournamentPlayer[]
+  collection: TournamentPlayer[]
 }
 
 const initialState: TournamentPlayerState = {
-  tournamentPlayers: [],
+  collection: [],
 }
 
 const tournamentPlayerSlice = createSlice({
@@ -15,26 +15,26 @@ const tournamentPlayerSlice = createSlice({
   initialState,
   reducers: {
     setTournamentPlayers: (state, action: PayloadAction<TournamentPlayer[]>) => {
-      state.tournamentPlayers = action.payload
+      state.collection = action.payload
     },
     addTournamentPlayer: (state, action: PayloadAction<TournamentPlayer>) => {
-      state.tournamentPlayers.push(action.payload)
+      state.collection.push(action.payload)
     },
     updateTournamentPlayer: (state, action: PayloadAction<TournamentPlayer>) => {
-      const index = state.tournamentPlayers.findIndex(t => t.id === action.payload.id)
+      const index = state.collection.findIndex(t => t.id === action.payload.id)
       if (index !== -1) {
-        state.tournamentPlayers[index] = action.payload
+        state.collection[index] = action.payload
       }
     },
     deleteTournamentPlayer: (state, action: PayloadAction<number>) => {
-      state.tournamentPlayers = state.tournamentPlayers.filter(t => t.id !== action.payload)
+      state.collection = state.collection.filter(t => t.id !== action.payload)
     },
   },
   extraReducers: (builder) => {
     builder.addMatcher(
       tournamentApi.endpoints.getTournamentFull.matchFulfilled,
       (state, action) => {
-        state.tournamentPlayers = action.payload.tournamentPlayers
+        state.collection = action.payload.tournamentPlayers
       }
     )
   },

@@ -3,13 +3,13 @@ import { GroupMatch } from '../../types/groupMatchType'
 import { tournamentApi } from '../apis/tournamentApi'
 
 interface GroupMatchState {
-  groupMatches: GroupMatch[]
-  groupMatch: GroupMatch | null
+  collection: GroupMatch[]
+  current: GroupMatch | null
 }
 
 const initialState: GroupMatchState = {
-  groupMatches: [],
-  groupMatch: null,
+  collection: [],
+  current: null,
 }
 
 const groupMatchSlice = createSlice({
@@ -17,29 +17,29 @@ const groupMatchSlice = createSlice({
   initialState,
   reducers: {
     setGroupMatches: (state, action: PayloadAction<GroupMatch[]>) => {
-      state.groupMatches = action.payload
+      state.collection = action.payload
     },
     addGroupMatch: (state, action: PayloadAction<GroupMatch>) => {
-      state.groupMatches.push(action.payload)
+      state.collection.push(action.payload)
     },
     updateGroupMatch: (state, action: PayloadAction<GroupMatch>) => {
-      const index = state.groupMatches.findIndex(t => t.id === action.payload.id)
+      const index = state.collection.findIndex(t => t.id === action.payload.id)
       if (index !== -1) {
-        state.groupMatches[index] = action.payload
+        state.collection[index] = action.payload
       }
     },
     deleteGroupMatch: (state, action: PayloadAction<number>) => {
-      state.groupMatches = state.groupMatches.filter(t => t.id !== action.payload)
+      state.collection = state.collection.filter(t => t.id !== action.payload)
     },
     setGroupMatch: (state, action: PayloadAction<GroupMatch | null>) => {
-      state.groupMatch = action.payload
+      state.current = action.payload
     },
   },
   extraReducers: (builder) => {
     builder.addMatcher(
       tournamentApi.endpoints.getTournamentFull.matchFulfilled,
       (state, action) => {
-        state.groupMatches = action.payload.groupMatches
+        state.collection = action.payload.groupMatches
       }
     )
   },

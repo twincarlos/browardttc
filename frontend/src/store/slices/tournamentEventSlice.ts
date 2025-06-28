@@ -3,13 +3,13 @@ import { TournamentEvent } from '../../types/tournamentEventType'
 import { tournamentApi } from '../apis/tournamentApi'
 
 interface TournamentEventState {
-  tournamentEvents: TournamentEvent[]
-  tournamentEvent: TournamentEvent | null
+  collection: TournamentEvent[]
+  current: TournamentEvent | null
 }
 
 const initialState: TournamentEventState = {
-  tournamentEvents: [],
-  tournamentEvent: null,
+  collection: [],
+  current: null,
 }
 
 const tournamentEventSlice = createSlice({
@@ -17,29 +17,29 @@ const tournamentEventSlice = createSlice({
   initialState,
   reducers: {
     setTournamentEvents: (state, action: PayloadAction<TournamentEvent[]>) => {
-      state.tournamentEvents = action.payload
+      state.collection = action.payload
     },
     addTournamentEvent: (state, action: PayloadAction<TournamentEvent>) => {
-      state.tournamentEvents.push(action.payload)
+      state.collection.push(action.payload)
     },
     updateTournamentEvent: (state, action: PayloadAction<TournamentEvent>) => {
-      const index = state.tournamentEvents.findIndex(t => t.id === action.payload.id)
+      const index = state.collection.findIndex(t => t.id === action.payload.id)
       if (index !== -1) {
-        state.tournamentEvents[index] = action.payload
+        state.collection[index] = action.payload
       }
     },
     deleteTournamentEvent: (state, action: PayloadAction<number>) => {
-      state.tournamentEvents = state.tournamentEvents.filter(t => t.id !== action.payload)
+      state.collection = state.collection.filter(t => t.id !== action.payload)
     },
     setTournamentEvent: (state, action: PayloadAction<TournamentEvent | null>) => {
-      state.tournamentEvent = action.payload
+      state.current = action.payload
     },
   },
   extraReducers: (builder) => {
     builder.addMatcher(
       tournamentApi.endpoints.getTournamentFull.matchFulfilled,
       (state, action) => {
-        state.tournamentEvents = action.payload.tournamentEvents
+        state.collection = action.payload.tournamentEvents
       }
     )
   },

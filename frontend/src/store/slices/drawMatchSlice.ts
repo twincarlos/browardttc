@@ -3,13 +3,13 @@ import { DrawMatch } from '../../types/drawMatchType'
 import { tournamentApi } from '../apis/tournamentApi'
 
 interface DrawMatchState {
-  drawMatches: DrawMatch[]
-  drawMatch: DrawMatch | null
+  collection: DrawMatch[]
+  current: DrawMatch | null
 }
 
 const initialState: DrawMatchState = {
-  drawMatches: [],
-  drawMatch: null,
+  collection: [],
+  current: null,
 }
 
 const drawMatchSlice = createSlice({
@@ -17,29 +17,29 @@ const drawMatchSlice = createSlice({
   initialState,
   reducers: {
     setDrawMatches: (state, action: PayloadAction<DrawMatch[]>) => {
-      state.drawMatches = action.payload
+      state.collection = action.payload
     },
     addDrawMatch: (state, action: PayloadAction<DrawMatch>) => {
-      state.drawMatches.push(action.payload)
+      state.collection.push(action.payload)
     },
     updateDrawMatch: (state, action: PayloadAction<DrawMatch>) => {
-      const index = state.drawMatches.findIndex(t => t.id === action.payload.id)
+      const index = state.collection.findIndex(t => t.id === action.payload.id)
       if (index !== -1) {
-        state.drawMatches[index] = action.payload
+        state.collection[index] = action.payload
       }
     },
     deleteDrawMatch: (state, action: PayloadAction<number>) => {
-      state.drawMatches = state.drawMatches.filter(t => t.id !== action.payload)
+      state.collection = state.collection.filter(t => t.id !== action.payload)
     },
     setDrawMatch: (state, action: PayloadAction<DrawMatch | null>) => {
-      state.drawMatch = action.payload
+      state.current = action.payload
     },
   },
   extraReducers: (builder) => {
     builder.addMatcher(
       tournamentApi.endpoints.getTournamentFull.matchFulfilled,
       (state, action) => {
-        state.drawMatches = action.payload.drawMatches
+        state.collection = action.payload.drawMatches
       }
     )
   },

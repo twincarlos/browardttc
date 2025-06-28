@@ -3,13 +3,13 @@ import { Tournament } from '../../types/tournamentType'
 import { tournamentApi } from '../apis/tournamentApi'
 
 interface TournamentState {
-  tournaments: Tournament[]
-  tournament: Tournament | null
+  collection: Tournament[]
+  current: Tournament | null
 }
 
 const initialState: TournamentState = {
-  tournaments: [],
-  tournament: null,
+  collection: [],
+  current: null,
 }
 
 const tournamentSlice = createSlice({
@@ -17,29 +17,29 @@ const tournamentSlice = createSlice({
   initialState,
   reducers: {
     setTournaments: (state, action: PayloadAction<Tournament[]>) => {
-      state.tournaments = action.payload
+      state.collection = action.payload
     },
     addTournament: (state, action: PayloadAction<Tournament>) => {
-      state.tournaments.push(action.payload)
+      state.collection.push(action.payload)
     },
     updateTournament: (state, action: PayloadAction<Tournament>) => {
-      const index = state.tournaments.findIndex(t => t.id === action.payload.id)
+      const index = state.collection.findIndex(t => t.id === action.payload.id)
       if (index !== -1) {
-        state.tournaments[index] = action.payload
+        state.collection[index] = action.payload
       }
     },
     deleteTournament: (state, action: PayloadAction<number>) => {
-      state.tournaments = state.tournaments.filter(t => t.id !== action.payload)
+      state.collection = state.collection.filter(t => t.id !== action.payload)
     },
     setTournament: (state, action: PayloadAction<Tournament | null>) => {
-      state.tournament = action.payload
+      state.current = action.payload
     },
   },
   extraReducers: (builder) => {
     builder.addMatcher(
       tournamentApi.endpoints.getTournamentFull.matchFulfilled,
       (state, action) => {
-        state.tournament = action.payload.tournament
+        state.current = action.payload.tournament
       }
     )
   },

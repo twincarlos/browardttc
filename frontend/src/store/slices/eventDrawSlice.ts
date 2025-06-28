@@ -3,11 +3,11 @@ import { EventDraw } from '../../types/eventDrawType';
 import { tournamentApi } from '../apis/tournamentApi';
 
 interface EventDrawState {
-  eventDraw: EventDraw | null;
+  current: EventDraw | null;
 }
 
 const initialState: EventDrawState = {
-  eventDraw: null,
+  current: null,
 };
 
 const eventDrawSlice = createSlice({
@@ -15,20 +15,20 @@ const eventDrawSlice = createSlice({
   initialState,
   reducers: {
     setEventDraw: (state, action: PayloadAction<EventDraw | null>) => {
-      state.eventDraw = action.payload;
+      state.current = action.payload;
     },
     updateEventDraw: (state, action: PayloadAction<EventDraw>) => {
-      state.eventDraw = action.payload;
+      state.current = action.payload;
     },
     deleteEventDraw: (state, action: PayloadAction<number>) => {
-      state.eventDraw = null;
+      state.current = null;
     },
   },
   extraReducers: (builder) => {
     builder.addMatcher(
       tournamentApi.endpoints.getTournamentFull.matchFulfilled,
       (state, action) => {
-        state.eventDraw = action.payload.eventDraw
+        state.current = action.payload.eventDraw
       }
     )
   },

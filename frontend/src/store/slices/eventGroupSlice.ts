@@ -3,11 +3,11 @@ import { EventGroup } from '../../types/eventGroupType'
 import { tournamentApi } from '../apis/tournamentApi'
 
 interface EventGroupState {
-  eventGroups: EventGroup[]
+  collection: EventGroup[]
 }
 
 const initialState: EventGroupState = {
-  eventGroups: [],
+  collection: [],
 }
 
 const eventGroupSlice = createSlice({
@@ -15,26 +15,26 @@ const eventGroupSlice = createSlice({
   initialState,
   reducers: {
     setEventGroups: (state, action: PayloadAction<EventGroup[]>) => {
-      state.eventGroups = action.payload
+      state.collection = action.payload
     },
     addEventGroup: (state, action: PayloadAction<EventGroup>) => {
-      state.eventGroups.push(action.payload)
+      state.collection.push(action.payload)
     },
     updateEventGroup: (state, action: PayloadAction<EventGroup>) => {
-      const index = state.eventGroups.findIndex(t => t.id === action.payload.id)
+      const index = state.collection.findIndex(t => t.id === action.payload.id)
       if (index !== -1) {
-        state.eventGroups[index] = action.payload
+        state.collection[index] = action.payload
       }
     },
     deleteEventGroup: (state, action: PayloadAction<number>) => {
-      state.eventGroups = state.eventGroups.filter(t => t.id !== action.payload)
+      state.collection = state.collection.filter(t => t.id !== action.payload)
     },
   },
   extraReducers: (builder) => {
     builder.addMatcher(
       tournamentApi.endpoints.getTournamentFull.matchFulfilled,
       (state, action) => {
-        state.eventGroups = action.payload.eventGroups
+        state.collection = action.payload.eventGroups
       }
     )
   },

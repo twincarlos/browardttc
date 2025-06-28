@@ -3,11 +3,11 @@ import { GroupMatchTable } from '../../types/groupMatchTableType'
 import { tournamentApi } from '../apis/tournamentApi'
 
 interface GroupMatchTableState {
-  groupMatchTables: GroupMatchTable[]
+  collection: GroupMatchTable[]
 }
 
 const initialState: GroupMatchTableState = {
-  groupMatchTables: [],
+  collection: [],
 }
 
 const groupMatchSlice = createSlice({
@@ -15,26 +15,26 @@ const groupMatchSlice = createSlice({
   initialState,
   reducers: {
     setGroupMatchTables: (state, action: PayloadAction<GroupMatchTable[]>) => {
-      state.groupMatchTables = action.payload
+      state.collection = action.payload
     },
     addGroupMatchTable: (state, action: PayloadAction<GroupMatchTable>) => {
-      state.groupMatchTables.push(action.payload)
+      state.collection.push(action.payload)
     },
     updateGroupMatchTable: (state, action: PayloadAction<GroupMatchTable>) => {
-      const index = state.groupMatchTables.findIndex(t => t.id === action.payload.id)
+      const index = state.collection.findIndex(t => t.id === action.payload.id)
       if (index !== -1) {
-        state.groupMatchTables[index] = action.payload
+        state.collection[index] = action.payload
       }
     },
     deleteGroupMatchTable: (state, action: PayloadAction<number>) => {
-      state.groupMatchTables = state.groupMatchTables.filter(t => t.id !== action.payload)
+      state.collection = state.collection.filter(t => t.id !== action.payload)
     },
   },
   extraReducers: (builder) => {
     builder.addMatcher(
       tournamentApi.endpoints.getTournamentFull.matchFulfilled,
       (state, action) => {
-        state.groupMatchTables = action.payload.groupMatchTables
+        state.collection = action.payload.groupMatchTables
       }
     )
   },
