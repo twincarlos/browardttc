@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { GroupMatch } from './groupMatchType'
+import { GroupMatch } from '../../types/groupMatchType'
 
 interface GroupMatchState {
   groupMatches: GroupMatch[]

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { GroupPlayer } from './groupPlayerType'
+import { GroupPlayer } from '../../types/groupPlayerType'
 
 interface GroupPlayerState {
   groupPlayers: GroupPlayer[]

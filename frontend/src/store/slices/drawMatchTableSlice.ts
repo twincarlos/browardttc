@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { DrawMatchTable } from './drawMatchTableType'
+import { DrawMatchTable } from '../../types/drawMatchTableType'
 
 interface DrawMatchTableState {
   drawMatchTables: DrawMatchTable[]

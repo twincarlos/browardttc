@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { EventDraw } from './eventDrawType';
+import { EventDraw } from '../../types/eventDrawType';
 
 interface EventDrawState {
   eventDraw: EventDraw | null;

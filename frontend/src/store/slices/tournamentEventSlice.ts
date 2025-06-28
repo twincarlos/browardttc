@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { TournamentEvent } from './tournamentEventType'
+import { TournamentEvent } from '../../types/tournamentEventType'
 
 interface TournamentEventState {
   tournamentEvents: TournamentEvent[]

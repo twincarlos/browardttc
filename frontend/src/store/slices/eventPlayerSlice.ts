@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { EventPlayer } from './eventPlayerType'
+import { EventPlayer } from '../../types/eventPlayerType'
 
 interface EventPlayerState {
   eventPlayers: EventPlayer[]

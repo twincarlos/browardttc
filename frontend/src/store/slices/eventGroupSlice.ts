@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { EventGroup } from './eventGroupType'
+import { EventGroup } from '../../types/eventGroupType'
 
 interface EventGroupState {
   eventGroups: EventGroup[]

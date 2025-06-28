@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { DrawPlayer } from './drawPlayerType'
+import { DrawPlayer } from '../../types/drawPlayerType'
 
 interface DrawPlayerState {
   drawPlayers: DrawPlayer[]

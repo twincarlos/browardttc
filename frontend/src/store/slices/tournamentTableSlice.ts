@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { TournamentTable } from './tournamentTableType'
+import { TournamentTable } from '../../types/tournamentTableType'
 
 interface TournamentTableState {
   tournamentTables: TournamentTable[]

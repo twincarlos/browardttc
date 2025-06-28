@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import tournamentReducer from './features/tournament/tournamentSlice'
+import tournamentReducer from './slices/tournamentSlice'
 
 export const store = configureStore({
   reducer: {
@@ -8,4 +8,4 @@ export const store = configureStore({
 })
 
 export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch 
+export type AppDispatch = typeof store.dispatch

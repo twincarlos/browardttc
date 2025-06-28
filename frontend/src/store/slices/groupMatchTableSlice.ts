@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { GroupMatchTable } from './groupMatchTableType'
+import { GroupMatchTable } from '../../types/groupMatchTableType'
 
 interface GroupMatchTableState {
   groupMatchTables: GroupMatchTable[]
