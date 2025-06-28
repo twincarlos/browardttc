@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { TournamentTable } from '../../types/tournamentTableType'
+import { tournamentApi } from '../apis/tournamentApi'
 
 interface TournamentTableState {
   tournamentTables: TournamentTable[]
@@ -28,6 +29,14 @@ const tournamentTableSlice = createSlice({
     deleteTournamentTable: (state, action: PayloadAction<number>) => {
       state.tournamentTables = state.tournamentTables.filter(t => t.id !== action.payload)
     },
+  },
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      tournamentApi.endpoints.getTournamentFull.matchFulfilled,
+      (state, action) => {
+        state.tournamentTables = action.payload.tournamentTables
+      }
+    )
   },
 })
 

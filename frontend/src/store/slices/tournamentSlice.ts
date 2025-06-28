@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Tournament } from '../../types/tournamentType'
+import { tournamentApi } from '../apis/tournamentApi'
 
 interface TournamentState {
   tournaments: Tournament[]
@@ -33,6 +34,14 @@ const tournamentSlice = createSlice({
     setTournament: (state, action: PayloadAction<Tournament | null>) => {
       state.tournament = action.payload
     },
+  },
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      tournamentApi.endpoints.getTournamentFull.matchFulfilled,
+      (state, action) => {
+        state.tournament = action.payload.tournament
+      }
+    )
   },
 })
 

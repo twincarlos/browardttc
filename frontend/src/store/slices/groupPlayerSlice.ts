@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { GroupPlayer } from '../../types/groupPlayerType'
+import { tournamentApi } from '../apis/tournamentApi'
 
 interface GroupPlayerState {
   groupPlayers: GroupPlayer[]
@@ -28,6 +29,14 @@ const groupPlayerSlice = createSlice({
     deleteGroupPlayer: (state, action: PayloadAction<number>) => {
       state.groupPlayers = state.groupPlayers.filter(t => t.id !== action.payload)
     },
+  },
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      tournamentApi.endpoints.getTournamentFull.matchFulfilled,
+      (state, action) => {
+        state.groupPlayers = action.payload.groupPlayers
+      }
+    )
   },
 })
 

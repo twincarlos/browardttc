@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { EventGroup } from '../../types/eventGroupType'
+import { tournamentApi } from '../apis/tournamentApi'
 
 interface EventGroupState {
   eventGroups: EventGroup[]
@@ -28,6 +29,14 @@ const eventGroupSlice = createSlice({
     deleteEventGroup: (state, action: PayloadAction<number>) => {
       state.eventGroups = state.eventGroups.filter(t => t.id !== action.payload)
     },
+  },
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      tournamentApi.endpoints.getTournamentFull.matchFulfilled,
+      (state, action) => {
+        state.eventGroups = action.payload.eventGroups
+      }
+    )
   },
 })
 

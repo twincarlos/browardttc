@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { GroupMatch } from '../../types/groupMatchType'
+import { tournamentApi } from '../apis/tournamentApi'
 
 interface GroupMatchState {
   groupMatches: GroupMatch[]
@@ -33,6 +34,14 @@ const groupMatchSlice = createSlice({
     setGroupMatch: (state, action: PayloadAction<GroupMatch | null>) => {
       state.groupMatch = action.payload
     },
+  },
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      tournamentApi.endpoints.getTournamentFull.matchFulfilled,
+      (state, action) => {
+        state.groupMatches = action.payload.groupMatches
+      }
+    )
   },
 })
 

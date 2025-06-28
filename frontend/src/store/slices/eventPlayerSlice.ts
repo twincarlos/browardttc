@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { EventPlayer } from '../../types/eventPlayerType'
+import { tournamentApi } from '../apis/tournamentApi'
 
 interface EventPlayerState {
   eventPlayers: EventPlayer[]
@@ -28,6 +29,14 @@ const eventPlayerSlice = createSlice({
     deleteEventPlayer: (state, action: PayloadAction<number>) => {
       state.eventPlayers = state.eventPlayers.filter(t => t.id !== action.payload)
     },
+  },
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      tournamentApi.endpoints.getTournamentFull.matchFulfilled,
+      (state, action) => {
+        state.eventPlayers = action.payload.eventPlayers
+      }
+    )
   },
 })
 

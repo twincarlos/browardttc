@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { GroupMatchTable } from '../../types/groupMatchTableType'
+import { tournamentApi } from '../apis/tournamentApi'
 
 interface GroupMatchTableState {
   groupMatchTables: GroupMatchTable[]
@@ -28,6 +29,14 @@ const groupMatchSlice = createSlice({
     deleteGroupMatchTable: (state, action: PayloadAction<number>) => {
       state.groupMatchTables = state.groupMatchTables.filter(t => t.id !== action.payload)
     },
+  },
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      tournamentApi.endpoints.getTournamentFull.matchFulfilled,
+      (state, action) => {
+        state.groupMatchTables = action.payload.groupMatchTables
+      }
+    )
   },
 })
 
