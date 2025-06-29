@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
-import tournamentReducer from './slices/tournamentSlice'
 import { tournamentApi } from './apis/tournamentApi'
+import tournamentReducer from './slices/tournamentSlice'
 import tournamentEventReducer from './slices/tournamentEventSlice'
 import tournamentPlayerReducer from './slices/tournamentPlayerSlice'
 import tournamentTableReducer from './slices/tournamentTableSlice'
