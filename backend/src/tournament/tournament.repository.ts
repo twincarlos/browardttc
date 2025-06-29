@@ -17,11 +17,11 @@ export class TournamentRepository {
   }
 
   async findOne(id: number) {
-    const rows = await db
+    const [rows] = await db
       .select()
       .from(tournament)
       .where(eq(tournament.id, id));
-    return rows[0];
+    return rows;
   }
 
   async update(id: number, dto: UpdateTournamentDto) {
@@ -34,10 +34,7 @@ export class TournamentRepository {
   }
 
   async remove(id: number) {
-    await db
-      .delete(tournament)
-      .where(eq(tournament.id, id))
-      .returning();
+    await db.delete(tournament).where(eq(tournament.id, id)).returning();
     return id;
   }
-} 
+}

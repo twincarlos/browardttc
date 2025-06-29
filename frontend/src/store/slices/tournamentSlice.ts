@@ -43,7 +43,7 @@ const tournamentSlice = createSlice({
       (state, action) => {
         tournamentsAdapter.removeOne(
           state,
-          Number(action.meta.arg.originalArgs),
+          action.payload,
         );
       },
     );
