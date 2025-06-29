@@ -19,10 +19,6 @@ export class TournamentService {
     return this.tournamentRepository.findOne(id);
   }
 
-  async findOneFull(id: number) {
-    return this.tournamentRepository.findOneFull(id);
-  }
-
   async update(id: number, dto: UpdateTournamentDto) {
     return this.tournamentRepository.update(id, dto);
   }

@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { DrawMatchTable } from '../../types/drawMatchTableType'
-import { tournamentApi } from '../apis/tournamentApi'
 
 interface DrawMatchTableState {
   collection: DrawMatchTable[]
@@ -29,14 +28,6 @@ const drawMatchTableSlice = createSlice({
     deleteDrawMatchTable: (state, action: PayloadAction<number>) => {
       state.collection = state.collection.filter(t => t.id !== action.payload)
     },
-  },
-  extraReducers: (builder) => {
-    builder.addMatcher(
-      tournamentApi.endpoints.getTournamentFull.matchFulfilled,
-      (state, action) => {
-        state.collection = action.payload.drawMatchTables
-      }
-    )
   },
 })
 

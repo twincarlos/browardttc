@@ -22,11 +22,6 @@ export class TournamentController {
     return this.tournamentService.findOne(Number(id));
   }
 
-  @Get(':id/full')
-  findOneFull(@Param('id') id: string) {
-    return this.tournamentService.findOneFull(Number(id));
-  }
-
   @Patch(':id')
   update(@Param('id') id: string, @Body() dto: UpdateTournamentDto) {
     return this.tournamentService.update(Number(id), dto);

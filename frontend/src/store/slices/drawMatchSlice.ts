@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { DrawMatch } from '../../types/drawMatchType'
-import { tournamentApi } from '../apis/tournamentApi'
 
 interface DrawMatchState {
   collection: DrawMatch[]
@@ -34,14 +33,6 @@ const drawMatchSlice = createSlice({
     setDrawMatch: (state, action: PayloadAction<DrawMatch | null>) => {
       state.current = action.payload
     },
-  },
-  extraReducers: (builder) => {
-    builder.addMatcher(
-      tournamentApi.endpoints.getTournamentFull.matchFulfilled,
-      (state, action) => {
-        state.collection = action.payload.drawMatches
-      }
-    )
   },
 })
 

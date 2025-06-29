@@ -1,16 +1,20 @@
-'use client'
-import { use } from 'react'
-import { useGetTournamentFullQuery } from '@/store/apis/tournamentApi'
+'use client';
+import { useParams } from 'next/navigation';
+import { useGetTournamentQuery } from '@/store/apis/tournamentApi';
+import { useAppSelector } from '@/hooks/useAppSelector';
 
-export default function TournamentPage({ params }: { params: Promise<{ tournamentId: string }> }) {
-  const { tournamentId } = use(params)
-  const { isLoading, error } = useGetTournamentFullQuery(tournamentId)
+export default function TournamentPage() {
+  const { tournamentId } = useParams();
+  const { isLoading, error } = useGetTournamentQuery(tournamentId as string);
+  const tournament = useAppSelector((state) => state.tournament.current);
 
-  if (isLoading) return <div>Loading...</div>
-  if (error) return <div>Error: {(error as any).data.message}</div>
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {JSON.stringify(error)}</div>;
+  if (!tournament) return <div>Tournament not found</div>;
 
   return (
     <div>
+      <h1>{tournament.name}</h1>
     </div>
-  )
+  );
 }

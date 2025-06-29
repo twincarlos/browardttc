@@ -1,6 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { EventDraw } from '../../types/eventDrawType';
-import { tournamentApi } from '../apis/tournamentApi';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { EventDraw } from '../../types/eventDrawType'
 
 interface EventDrawState {
   current: EventDraw | null;
@@ -23,14 +22,6 @@ const eventDrawSlice = createSlice({
     deleteEventDraw: (state, action: PayloadAction<number>) => {
       state.current = null;
     },
-  },
-  extraReducers: (builder) => {
-    builder.addMatcher(
-      tournamentApi.endpoints.getTournamentFull.matchFulfilled,
-      (state, action) => {
-        state.current = action.payload.eventDraw
-      }
-    )
   },
 });
 
