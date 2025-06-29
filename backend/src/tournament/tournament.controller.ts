@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { TournamentService } from './tournament.service';
 import { CreateTournamentDto } from './dto/create-tournament.dto';
 import { UpdateTournamentDto } from './dto/update-tournament.dto';
@@ -19,16 +27,16 @@ export class TournamentController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.tournamentService.findOne(Number(id));
+    return this.tournamentService.findOne(+id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() dto: UpdateTournamentDto) {
-    return this.tournamentService.update(Number(id), dto);
+    return this.tournamentService.update(+id, dto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.tournamentService.remove(Number(id));
+    return this.tournamentService.remove(+id);
   }
 }

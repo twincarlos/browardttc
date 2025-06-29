@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
-import { db } from '../index';
+import { db } from 'src';
 import { tournament } from '../db/schema';
 import { CreateTournamentDto } from './dto/create-tournament.dto';
 import { UpdateTournamentDto } from './dto/update-tournament.dto';
@@ -34,10 +34,10 @@ export class TournamentRepository {
   }
 
   async remove(id: number) {
-    const [deleted] = await db
+    await db
       .delete(tournament)
       .where(eq(tournament.id, id))
       .returning();
-    return deleted;
+    return id;
   }
 } 

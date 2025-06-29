@@ -4,5 +4,4 @@ export class CreateTournamentDto {
   registration_deadline?: string;
   rating_cutoff?: string;
   date?: string;
-  time?: string;
 }
