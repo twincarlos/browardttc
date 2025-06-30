@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+} from '@nestjs/common';
 import { GroupPlayerService } from './group-player.service';
 import { CreateGroupPlayerDto } from './dto/create-group-player.dto';
 import { UpdateGroupPlayerDto } from './dto/update-group-player.dto';
@@ -13,8 +22,18 @@ export class GroupPlayerController {
   }
 
   @Get()
-  findAll() {
-    return this.groupPlayerService.findAll();
+  findAllByTournamentId(
+    @Query('tournament_id') tournament_id: string,
+    @Query('tournament_event_id') tournament_event_id: string,
+  ) {
+    if (tournament_id) {
+      return this.groupPlayerService.findAllByTournamentId(+tournament_id);
+    }
+    if (tournament_event_id) {
+      return this.groupPlayerService.findAllByTournamentEventId(
+        +tournament_event_id,
+      );
+    }
   }
 
   @Get(':id')

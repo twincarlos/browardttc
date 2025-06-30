@@ -11,8 +11,14 @@ export class GroupMatchService {
     return this.groupMatchRepository.create(dto);
   }
 
-  findAll() {
-    return this.groupMatchRepository.findAll();
+  findAllByTournamentId(tournament_id: number) {
+    return this.groupMatchRepository.findAllByTournamentId(tournament_id);
+  }
+
+  findAllByTournamentEventId(tournament_event_id: number) {
+    return this.groupMatchRepository.findAllByTournamentEventId(
+      tournament_event_id,
+    );
   }
 
   findOne(id: number) {

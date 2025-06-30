@@ -11,8 +11,14 @@ export class EventPlayerService {
     return this.eventPlayerRepository.create(dto);
   }
 
-  findAll() {
-    return this.eventPlayerRepository.findAll();
+  findAllByTournamentId(tournament_id: number) {
+    return this.eventPlayerRepository.findAllByTournamentId(tournament_id);
+  }
+
+  findAllByTournamentEventId(tournament_event_id: number) {
+    return this.eventPlayerRepository.findAllByTournamentEventId(
+      tournament_event_id,
+    );
   }
 
   findOne(id: number) {

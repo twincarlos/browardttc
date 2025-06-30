@@ -5,14 +5,22 @@ import { DrawMatchTableRepository } from './draw-match-table.repository';
 
 @Injectable()
 export class DrawMatchTableService {
-  constructor(private readonly drawMatchTableRepository: DrawMatchTableRepository) {}
+  constructor(
+    private readonly drawMatchTableRepository: DrawMatchTableRepository,
+  ) {}
 
   create(dto: CreateDrawMatchTableDto) {
     return this.drawMatchTableRepository.create(dto);
   }
 
-  findAll() {
-    return this.drawMatchTableRepository.findAll();
+  findAllByTournamentId(tournament_id: number) {
+    return this.drawMatchTableRepository.findAllByTournamentId(tournament_id);
+  }
+
+  findAllByTournamentEventId(tournament_event_id: number) {
+    return this.drawMatchTableRepository.findAllByTournamentEventId(
+      tournament_event_id,
+    );
   }
 
   findOne(id: number) {

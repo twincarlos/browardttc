@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { groupPlayer } from 'src/db/schema';
+import { eventGroup, tournamentEvent, groupPlayer } from 'src/db/schema';
 import { db } from 'src';
 import { CreateGroupPlayerDto } from './dto/create-group-player.dto';
 import { UpdateGroupPlayerDto } from './dto/update-group-player.dto';
@@ -12,8 +12,24 @@ export class GroupPlayerRepository {
     return created;
   }
 
-  async findAll() {
-    return db.select().from(groupPlayer);
+  async findAllByTournamentId(tournament_id: number) {
+    return db
+      .select()
+      .from(groupPlayer)
+      .innerJoin(eventGroup, eq(groupPlayer.event_group_id, eventGroup.id))
+      .innerJoin(
+        tournamentEvent,
+        eq(eventGroup.tournament_event_id, tournamentEvent.id),
+      )
+      .where(eq(tournamentEvent.tournament_id, tournament_id));
+  }
+
+  async findAllByTournamentEventId(tournament_event_id: number) {
+    return db
+      .select()
+      .from(groupPlayer)
+      .innerJoin(eventGroup, eq(groupPlayer.event_group_id, eventGroup.id))
+      .where(eq(eventGroup.tournament_event_id, tournament_event_id));
   }
 
   async findOne(id: number) {

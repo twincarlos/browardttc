@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreateEventPlayerDto } from './dto/create-event-player.dto';
-import { eventPlayer } from 'src/db/schema';
+import { eventPlayer, tournamentEvent } from 'src/db/schema';
 import { db } from 'src';
 import { eq } from 'drizzle-orm';
 import { UpdateEventPlayerDto } from './dto/update-event-player.dto';
@@ -12,8 +12,22 @@ export class EventPlayerRepository {
     return created;
   }
 
-  async findAll() {
-    return db.select().from(eventPlayer);
+  async findAllByTournamentId(tournament_id: number) {
+    return db
+      .select()
+      .from(eventPlayer)
+      .innerJoin(
+        tournamentEvent,
+        eq(eventPlayer.tournament_event_id, tournamentEvent.id),
+      )
+      .where(eq(tournamentEvent.tournament_id, tournament_id));
+  }
+
+  async findAllByTournamentEventId(tournament_event_id: number) {
+    return db
+      .select()
+      .from(eventPlayer)
+      .where(eq(eventPlayer.tournament_event_id, tournament_event_id));
   }
 
   async findOne(id: number) {

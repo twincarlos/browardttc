@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { TournamentPlayerService } from './tournament-player.service';
 import { CreateTournamentPlayerDto } from './dto/create-tournament-player.dto';
@@ -23,8 +24,8 @@ export class TournamentPlayerController {
   }
 
   @Get()
-  findAll() {
-    return this.tournamentPlayerService.findAll();
+  findAllByTournamentId(@Query('tournament_id') tournament_id: string) {
+    return this.tournamentPlayerService.findAllByTournamentId(+tournament_id);
   }
 
   @Get(':id')

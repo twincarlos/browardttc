@@ -11,8 +11,14 @@ export class DrawMatchService {
     return this.drawMatchRepository.create(dto);
   }
 
-  findAll() {
-    return this.drawMatchRepository.findAll();
+  findAllByTournamentId(tournament_id: number) {
+    return this.drawMatchRepository.findAllByTournamentId(tournament_id);
+  }
+
+  findAllByTournamentEventId(tournament_event_id: number) {
+    return this.drawMatchRepository.findAllByTournamentEventId(
+      tournament_event_id,
+    );
   }
 
   findOne(id: number) {

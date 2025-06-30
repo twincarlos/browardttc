@@ -11,8 +11,14 @@ export class DrawPlayerService {
     return this.drawPlayerRepository.create(dto);
   }
 
-  findAll() {
-    return this.drawPlayerRepository.findAll();
+  findAllByTournamentId(tournament_id: number) {
+    return this.drawPlayerRepository.findAllByTournamentId(tournament_id);
+  }
+
+  findAllByTournamentEventId(tournament_event_id: number) {
+    return this.drawPlayerRepository.findAllByTournamentEventId(
+      tournament_event_id,
+    );
   }
 
   findOne(id: number) {

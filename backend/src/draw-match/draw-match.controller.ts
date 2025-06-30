@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+} from '@nestjs/common';
 import { DrawMatchService } from './draw-match.service';
 import { CreateDrawMatchDto } from './dto/create-draw-match.dto';
 import { UpdateDrawMatchDto } from './dto/update-draw-match.dto';
@@ -13,8 +22,18 @@ export class DrawMatchController {
   }
 
   @Get()
-  findAll() {
-    return this.drawMatchService.findAll();
+  findAllByTournamentId(
+    @Query('tournament_id') tournament_id: string,
+    @Query('tournament_event_id') tournament_event_id: string,
+  ) {
+    if (tournament_id) {
+      return this.drawMatchService.findAllByTournamentId(+tournament_id);
+    }
+    if (tournament_event_id) {
+      return this.drawMatchService.findAllByTournamentEventId(
+        +tournament_event_id,
+      );
+    }
   }
 
   @Get(':id')

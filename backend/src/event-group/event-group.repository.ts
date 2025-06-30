@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { eventGroup } from 'src/db/schema';
+import { eventGroup, tournamentEvent } from 'src/db/schema';
 import { db } from 'src';
 import { CreateEventGroupDto } from './dto/create-event-group.dto';
 import { eq } from 'drizzle-orm';
@@ -12,8 +12,22 @@ export class EventGroupRepository {
     return created;
   }
 
-  async findAll() {
-    return db.select().from(eventGroup);
+  async findAllByTournamentId(tournament_id: number) {
+    return db
+      .select()
+      .from(eventGroup)
+      .innerJoin(
+        tournamentEvent,
+        eq(eventGroup.tournament_event_id, tournamentEvent.id),
+      )
+      .where(eq(tournamentEvent.tournament_id, tournament_id));
+  }
+
+  async findAllByTournamentEventId(tournament_event_id: number) {
+    return db
+      .select()
+      .from(eventGroup)
+      .where(eq(eventGroup.tournament_event_id, tournament_event_id));
   }
 
   async findOne(id: number) {

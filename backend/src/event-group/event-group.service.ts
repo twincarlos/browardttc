@@ -11,8 +11,14 @@ export class EventGroupService {
     return this.eventGroupRepository.create(dto);
   }
 
-  findAll() {
-    return this.eventGroupRepository.findAll();
+  findAllByTournamentId(tournament_id: number) {
+    return this.eventGroupRepository.findAllByTournamentId(tournament_id);
+  }
+
+  findAllByTournamentEventId(tournament_event_id: number) {
+    return this.eventGroupRepository.findAllByTournamentEventId(
+      tournament_event_id,
+    );
   }
 
   findOne(id: number) {

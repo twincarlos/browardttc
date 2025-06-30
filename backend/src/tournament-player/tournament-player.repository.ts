@@ -12,8 +12,11 @@ export class TournamentPlayerRepository {
     return created;
   }
 
-  async findAll() {
-    return db.select().from(tournamentPlayer);
+  async findAllByTournamentId(tournament_id: number) {
+    return db
+      .select()
+      .from(tournamentPlayer)
+      .where(eq(tournamentPlayer.tournament_id, tournament_id));
   }
 
   async findOne(id: number) {

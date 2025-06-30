@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+} from '@nestjs/common';
 import { EventGroupService } from './event-group.service';
 import { CreateEventGroupDto } from './dto/create-event-group.dto';
 import { UpdateEventGroupDto } from './dto/update-event-group.dto';
@@ -13,8 +22,18 @@ export class EventGroupController {
   }
 
   @Get()
-  findAll() {
-    return this.eventGroupService.findAll();
+  findAllByTournamentId(
+    @Query('tournament_id') tournament_id: string,
+    @Query('tournament_event_id') tournament_event_id: string,
+  ) {
+    if (tournament_id) {
+      return this.eventGroupService.findAllByTournamentId(+tournament_id);
+    }
+    if (tournament_event_id) {
+      return this.eventGroupService.findAllByTournamentEventId(
+        +tournament_event_id,
+      );
+    }
   }
 
   @Get(':id')

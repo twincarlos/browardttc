@@ -11,8 +11,14 @@ export class GroupPlayerService {
     return this.groupPlayerRepository.create(dto);
   }
 
-  findAll() {
-    return this.groupPlayerRepository.findAll();
+  findAllByTournamentId(tournament_id: number) {
+    return this.groupPlayerRepository.findAllByTournamentId(tournament_id);
+  }
+
+  findAllByTournamentEventId(tournament_event_id: number) {
+    return this.groupPlayerRepository.findAllByTournamentEventId(
+      tournament_event_id,
+    );
   }
 
   findOne(id: number) {

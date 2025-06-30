@@ -1,5 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { drawMatchTable } from 'src/db/schema';
+import {
+  drawMatch,
+  drawMatchTable,
+  drawPlayer,
+  eventDraw,
+  tournamentTable,
+} from 'src/db/schema';
 import { db } from 'src';
 import { CreateDrawMatchTableDto } from './dto/create-draw-match-table.dto';
 import { UpdateDrawMatchTableDto } from './dto/update-draw-match-table.dto';
@@ -12,8 +18,25 @@ export class DrawMatchTableRepository {
     return created;
   }
 
-  async findAll() {
-    return db.select().from(drawMatchTable);
+  async findAllByTournamentId(tournament_id: number) {
+    return db
+      .select()
+      .from(drawMatchTable)
+      .innerJoin(
+        tournamentTable,
+        eq(drawMatchTable.tournament_table_id, tournamentTable.id),
+      )
+      .where(eq(tournamentTable.tournament_id, tournament_id));
+  }
+
+  async findAllByTournamentEventId(tournament_event_id: number) {
+    return db
+      .select()
+      .from(drawMatchTable)
+      .innerJoin(drawMatch, eq(drawMatchTable.draw_match_id, drawMatch.id))
+      .innerJoin(drawPlayer, eq(drawMatch.draw_player1_id, drawPlayer.id))
+      .innerJoin(eventDraw, eq(drawPlayer.event_draw_id, eventDraw.id))
+      .where(eq(eventDraw.tournament_event_id, tournament_event_id));
   }
 
   async findOne(id: number) {

@@ -1,11 +1,22 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+} from '@nestjs/common';
 import { TournamentTableService } from './tournament-table.service';
 import { CreateTournamentTableDto } from './dto/create-tournament-table.dto';
 import { UpdateTournamentTableDto } from './dto/update-tournament-table.dto';
 
 @Controller('tournament-table')
 export class TournamentTableController {
-  constructor(private readonly tournamentTableService: TournamentTableService) {}
+  constructor(
+    private readonly tournamentTableService: TournamentTableService,
+  ) {}
 
   @Post()
   create(@Body() dto: CreateTournamentTableDto) {
@@ -13,8 +24,8 @@ export class TournamentTableController {
   }
 
   @Get()
-  findAll() {
-    return this.tournamentTableService.findAll();
+  findAllByTournamentId(@Query('tournament_id') tournament_id: string) {
+    return this.tournamentTableService.findAllByTournamentId(+tournament_id);
   }
 
   @Get(':id')

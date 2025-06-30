@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { drawPlayer } from 'src/db/schema';
+import { drawPlayer, tournamentEvent, eventDraw } from 'src/db/schema';
 import { db } from 'src';
 import { CreateDrawPlayerDto } from './dto/create-draw-player.dto';
 import { eq } from 'drizzle-orm';
@@ -12,8 +12,28 @@ export class DrawPlayerRepository {
     return created;
   }
 
-  async findAll() {
-    return db.select().from(drawPlayer);
+  async findAllByTournamentId(tournament_id: number) {
+    return db
+      .select()
+      .from(drawPlayer)
+      .innerJoin(eventDraw, eq(drawPlayer.event_draw_id, eventDraw.id))
+      .innerJoin(
+        tournamentEvent,
+        eq(eventDraw.tournament_event_id, tournamentEvent.id),
+      )
+      .where(eq(tournamentEvent.tournament_id, tournament_id));
+  }
+
+  async findAllByTournamentEventId(tournament_event_id: number) {
+    return db
+      .select()
+      .from(drawPlayer)
+      .innerJoin(eventDraw, eq(drawPlayer.event_draw_id, eventDraw.id))
+      .innerJoin(
+        tournamentEvent,
+        eq(eventDraw.tournament_event_id, tournamentEvent.id),
+      )
+      .where(eq(eventDraw.tournament_event_id, tournament_event_id));
   }
 
   async findOne(id: number) {

@@ -1,8 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { groupMatchTable } from 'src/db/schema';
+import {
+  eventGroup,
+  groupMatch,
+  groupMatchTable,
+  groupPlayer,
+  tournamentTable,
+} from 'src/db/schema';
 import { db } from 'src';
 import { CreateGroupMatchTableDto } from './dto/create-group-match-table.dto';
-import { eq } from 'drizzle-orm';
+import { eq, or } from 'drizzle-orm';
 import { UpdateGroupMatchTableDto } from './dto/update-group-match-table.dto';
 
 @Injectable()
@@ -12,8 +18,31 @@ export class GroupMatchTableRepository {
     return created;
   }
 
-  async findAll() {
-    return db.select().from(groupMatchTable);
+  async findAllByTournamentId(tournament_id: number) {
+    return db
+      .select()
+      .from(groupMatchTable)
+      .innerJoin(
+        tournamentTable,
+        eq(groupMatchTable.tournament_table_id, tournamentTable.id),
+      )
+      .where(eq(tournamentTable.tournament_id, tournament_id));
+  }
+
+  async findAllByTournamentEventId(tournament_event_id: number) {
+    return db
+      .select()
+      .from(groupMatchTable)
+      .innerJoin(groupMatch, eq(groupMatchTable.group_match_id, groupMatch.id))
+      .innerJoin(
+        groupPlayer,
+        or(
+          eq(groupMatch.group_player1_id, groupPlayer.id),
+          eq(groupMatch.group_player2_id, groupPlayer.id),
+        ),
+      )
+      .innerJoin(eventGroup, eq(groupPlayer.event_group_id, eventGroup.id))
+      .where(eq(eventGroup.tournament_event_id, tournament_event_id));
   }
 
   async findOne(id: number) {
