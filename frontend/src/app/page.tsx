@@ -1,20 +1,14 @@
-'use client';
-import { useGetTournamentsQuery } from '@/store/apis/tournamentApi';
-import { useAppSelector } from '@/hooks/useAppSelector';
-import { selectAllTournaments } from '@/store/slices/tournamentSlice';
+import Main from '@/components/StyledComponents/Main/Main';
+import Header from '@/components/StyledComponents/Header/Header';
+import TournamentGallery from '@/components/FeatureComponents/TournamentGallery/TournamentGallery';
 
 export default function Home() {
-  const { isLoading, error } = useGetTournamentsQuery();
-  const tournaments = useAppSelector(selectAllTournaments);
-
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {JSON.stringify(error)}</div>;
-
   return (
-    <div>
-      {Object.values(tournaments).map((tournament) => (
-        <div key={tournament.id}>{tournament.name}</div>
-      ))}
-    </div>
+    <>
+      <Header title={"Broward TTC | Tournaments"} />
+      <Main>
+        <TournamentGallery />
+      </Main>
+    </>
   );
 }
