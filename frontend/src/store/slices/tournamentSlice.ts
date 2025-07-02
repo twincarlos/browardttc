@@ -13,38 +13,35 @@ const tournamentSlice = createSlice({
   extraReducers: (builder) => {
     builder.addMatcher(
       tournamentApi.endpoints.getTournaments.matchFulfilled,
-      (state, action) => {
-        tournamentsAdapter.setAll(state, action.payload);
+      (state, { payload }) => {
+        tournamentsAdapter.setAll(state, payload);
       },
     );
     builder.addMatcher(
       tournamentApi.endpoints.getTournament.matchFulfilled,
-      (state, action) => {
-        tournamentsAdapter.setOne(state, action.payload);
+      (state, { payload }) => {
+        tournamentsAdapter.setOne(state, payload);
       },
     );
     builder.addMatcher(
       tournamentApi.endpoints.createTournament.matchFulfilled,
-      (state, action) => {
-        tournamentsAdapter.addOne(state, action.payload);
+      (state, { payload }) => {
+        tournamentsAdapter.addOne(state, payload);
       },
     );
     builder.addMatcher(
       tournamentApi.endpoints.updateTournament.matchFulfilled,
-      (state, action) => {
+      (state, { payload }) => {
         tournamentsAdapter.updateOne(state, {
-          id: action.payload.id,
-          changes: action.payload,
+          id: payload.id,
+          changes: payload,
         });
       },
     );
     builder.addMatcher(
       tournamentApi.endpoints.deleteTournament.matchFulfilled,
-      (state, action) => {
-        tournamentsAdapter.removeOne(
-          state,
-          action.payload,
-        );
+      (state, { payload }) => {
+        tournamentsAdapter.removeOne(state, payload);
       },
     );
   },

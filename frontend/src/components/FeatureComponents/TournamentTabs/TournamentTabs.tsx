@@ -1,9 +1,13 @@
 import Tabs from "@/components/StyledComponents/Tabs/Tabs";
-import type { Tournament as TournamentType } from "@/types/tournamentType";
+import TournamentEventGallery from "../TournamentEventGallery/TournamentEventGallery";
+import { useAppSelector } from "@/hooks/useAppSelector";
+import { selectAllTournamentEventsByTournamentId } from "@/store/slices/tournamentEventSlice";
 
-export default function TournamentTabs({ tournament }: { tournament: TournamentType }) {
+export default function TournamentTabs() {
+    const tournamentEvents = useAppSelector(selectAllTournamentEventsByTournamentId);
+
     const tabs = [
-        { label: 'Events', component: <div>Events</div> },
+        { label: 'Events', component: <TournamentEventGallery tournamentEvents={tournamentEvents} /> },
         { label: 'Players', component: <div>Players</div> },
         { label: 'Matches', component: <div>Matches</div> },
         { label: 'Tables', component: <div>Tables</div> },

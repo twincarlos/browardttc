@@ -1,47 +1,62 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { TournamentEvent } from '../../types/tournamentEventType'
+import {
+  createEntityAdapter,
+  createSlice,
+} from '@reduxjs/toolkit';
+import { TournamentEvent } from '../../types/tournamentEventType';
+import { tournamentEventApi } from '../apis/tournamentEventApi';
+import { RootState } from '../index';
 
-interface TournamentEventState {
-  collection: TournamentEvent[]
-  current: TournamentEvent | null
-}
-
-const initialState: TournamentEventState = {
-  collection: [],
-  current: null,
-}
+const tournamentEventAdapter = createEntityAdapter<TournamentEvent>();
+const initialState = tournamentEventAdapter.getInitialState();
 
 const tournamentEventSlice = createSlice({
   name: 'tournamentEvent',
   initialState,
-  reducers: {
-    setTournamentEvents: (state, action: PayloadAction<TournamentEvent[]>) => {
-      state.collection = action.payload
-    },
-    addTournamentEvent: (state, action: PayloadAction<TournamentEvent>) => {
-      state.collection.push(action.payload)
-    },
-    updateTournamentEvent: (state, action: PayloadAction<TournamentEvent>) => {
-      const index = state.collection.findIndex(t => t.id === action.payload.id)
-      if (index !== -1) {
-        state.collection[index] = action.payload
-      }
-    },
-    deleteTournamentEvent: (state, action: PayloadAction<number>) => {
-      state.collection = state.collection.filter(t => t.id !== action.payload)
-    },
-    setTournamentEvent: (state, action: PayloadAction<TournamentEvent | null>) => {
-      state.current = action.payload
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      tournamentEventApi.endpoints.getTournamentEventsByTournamentId
+        .matchFulfilled,
+      (state, { payload }) => {
+        tournamentEventAdapter.setAll(state, payload);
+      },
+    );
+    builder.addMatcher(
+      tournamentEventApi.endpoints.getTournamentEvent.matchFulfilled,
+      (state, { payload }) => {
+        tournamentEventAdapter.setOne(state, payload);
+      },
+    );
+    builder.addMatcher(
+      tournamentEventApi.endpoints.createTournamentEvent.matchFulfilled,
+      (state, { payload }) => {
+        tournamentEventAdapter.addOne(state, payload);
+      },
+    );
+    builder.addMatcher(
+      tournamentEventApi.endpoints.updateTournamentEvent.matchFulfilled,
+      (state, { payload }) => {
+        tournamentEventAdapter.updateOne(state, {
+          id: payload.id,
+          changes: payload,
+        });
+      },
+    );
+    builder.addMatcher(
+      tournamentEventApi.endpoints.deleteTournamentEvent.matchFulfilled,
+      (state, { payload }) => {
+        tournamentEventAdapter.removeOne(state, payload);
+      },
+    );
   },
-})
+});
 
 export const {
-  setTournamentEvents,
-  addTournamentEvent,
-  updateTournamentEvent,
-  deleteTournamentEvent,
-  setTournamentEvent,
-} = tournamentEventSlice.actions
+  selectAll: selectAllTournamentEventsByTournamentId,
+  selectById: selectTournamentEventById,
+  selectIds: selectTournamentEventIdsByTournamentId,
+} = tournamentEventAdapter.getSelectors(
+  (state: RootState) => state.tournamentEvent,
+);
 
-export default tournamentEventSlice.reducer 
+export default tournamentEventSlice.reducer;
