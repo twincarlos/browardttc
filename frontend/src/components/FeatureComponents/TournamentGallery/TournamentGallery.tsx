@@ -1,9 +1,11 @@
 import Link from 'next/link';
 import Tournament from '../Tournament/Tournament';
 import Gallery from '@/components/StyledComponents/Gallery/Galery';
-import type { Tournament as TournamentType } from '@/types/tournamentType';
+import { useAppSelector } from '@/hooks/useAppSelector';
+import { selectAllTournaments } from '@/store/slices/tournamentSlice';
 
-export default function TournamentGallery({ tournaments }: { tournaments: TournamentType[] }) {
+export default function TournamentGallery() {
+  const tournaments = useAppSelector(selectAllTournaments);
 
   return (
     <Gallery>

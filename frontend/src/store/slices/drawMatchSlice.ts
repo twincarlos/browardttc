@@ -1,36 +1,32 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, createEntityAdapter } from '@reduxjs/toolkit'
 import { DrawMatch } from '../../types/drawMatchType'
+import { RootState } from '../index';
 
-interface DrawMatchState {
-  collection: DrawMatch[]
-  current: DrawMatch | null
-}
-
-const initialState: DrawMatchState = {
-  collection: [],
-  current: null,
-}
+const drawMatchAdapter = createEntityAdapter<DrawMatch>();
+const initialState = drawMatchAdapter.getInitialState({
+  current: null as DrawMatch | null,
+});
 
 const drawMatchSlice = createSlice({
   name: 'drawMatch',
   initialState,
   reducers: {
-    setDrawMatches: (state, action: PayloadAction<DrawMatch[]>) => {
-      state.collection = action.payload
+    setDrawMatches: (state, action) => {
+      drawMatchAdapter.setAll(state, action.payload)
     },
-    addDrawMatch: (state, action: PayloadAction<DrawMatch>) => {
-      state.collection.push(action.payload)
+    addDrawMatch: (state, action) => {
+      drawMatchAdapter.addOne(state, action.payload)
     },
-    updateDrawMatch: (state, action: PayloadAction<DrawMatch>) => {
-      const index = state.collection.findIndex(t => t.id === action.payload.id)
-      if (index !== -1) {
-        state.collection[index] = action.payload
-      }
+    updateDrawMatch: (state, action) => {
+      drawMatchAdapter.updateOne(state, {
+        id: action.payload.id,
+        changes: action.payload,
+      })
     },
-    deleteDrawMatch: (state, action: PayloadAction<number>) => {
-      state.collection = state.collection.filter(t => t.id !== action.payload)
+    deleteDrawMatch: (state, action) => {
+      drawMatchAdapter.removeOne(state, action.payload)
     },
-    setDrawMatch: (state, action: PayloadAction<DrawMatch | null>) => {
+    setDrawMatch: (state, action) => {
       state.current = action.payload
     },
   },
@@ -43,5 +39,11 @@ export const {
   deleteDrawMatch,
   setDrawMatch,
 } = drawMatchSlice.actions
+
+export const {
+  selectById: selectDrawMatchById,
+  selectIds: selectDrawMatchIds,
+  selectEntities: selectAllDrawMatches,
+} = drawMatchAdapter.getSelectors((state: RootState) => state.drawMatch);
 
 export default drawMatchSlice.reducer

@@ -1,32 +1,28 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, createEntityAdapter } from '@reduxjs/toolkit'
 import { EventPlayer } from '../../types/eventPlayerType'
+import { RootState } from '../index';
 
-interface EventPlayerState {
-  collection: EventPlayer[]
-}
-
-const initialState: EventPlayerState = {
-  collection: [],
-}
+const eventPlayerAdapter = createEntityAdapter<EventPlayer>();
+const initialState = eventPlayerAdapter.getInitialState();
 
 const eventPlayerSlice = createSlice({
   name: 'eventPlayer',
   initialState,
   reducers: {
-    setEventPlayers: (state, action: PayloadAction<EventPlayer[]>) => {
-      state.collection = action.payload
+    setEventPlayers: (state, action) => {
+      eventPlayerAdapter.setAll(state, action.payload)
     },
-    addEventPlayer: (state, action: PayloadAction<EventPlayer>) => {
-      state.collection.push(action.payload)
+    addEventPlayer: (state, action) => {
+      eventPlayerAdapter.addOne(state, action.payload)
     },
-    updateEventPlayer: (state, action: PayloadAction<EventPlayer>) => {
-      const index = state.collection.findIndex(t => t.id === action.payload.id)
-      if (index !== -1) {
-        state.collection[index] = action.payload
-      }
+    updateEventPlayer: (state, action) => {
+      eventPlayerAdapter.updateOne(state, {
+        id: action.payload.id,
+        changes: action.payload,
+      })
     },
-    deleteEventPlayer: (state, action: PayloadAction<number>) => {
-      state.collection = state.collection.filter(t => t.id !== action.payload)
+    deleteEventPlayer: (state, action) => {
+      eventPlayerAdapter.removeOne(state, action.payload)
     },
   },
 })
@@ -37,5 +33,11 @@ export const {
   updateEventPlayer,
   deleteEventPlayer,
 } = eventPlayerSlice.actions
+
+export const {
+  selectById: selectEventPlayerById,
+  selectIds: selectEventPlayerIds,
+  selectEntities: selectAllEventPlayers,
+} = eventPlayerAdapter.getSelectors((state: RootState) => state.eventPlayer);
 
 export default eventPlayerSlice.reducer

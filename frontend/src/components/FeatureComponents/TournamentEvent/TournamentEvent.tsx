@@ -1,5 +1,8 @@
 import './TournamentEvent.css';
+import Card from '@/components/StyledComponents/Card/Card';
+import Status from '@/components/StyledComponents/Status/Status';
 import type { TournamentEvent as TournamentEventType } from '@/types/tournamentEventType';
+import formatDate from '@/utils/formatDate';
 
 export default function TournamentEvent({
   tournamentEvent,
@@ -7,8 +10,16 @@ export default function TournamentEvent({
   tournamentEvent: TournamentEventType;
 }) {
   return (
-    <div>
-      <h1>{tournamentEvent.name}</h1>
-    </div>
+    <Card>
+      <div className="tournament-event">
+        <Status status={tournamentEvent.status} />
+        <span className="tournament-event-name mt-1">{tournamentEvent.name}</span>
+        {tournamentEvent.date && (
+          <span className="tournament-event-date fs-sm">
+            {formatDate(tournamentEvent.date)}
+          </span>
+        )}
+      </div>
+    </Card>
   );
 }

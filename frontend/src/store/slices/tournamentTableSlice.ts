@@ -1,36 +1,28 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
 import { TournamentTable } from '../../types/tournamentTableType';
+import { RootState } from '../index';
 
-interface TournamentTableState {
-  collection: TournamentTable[];
-}
-
-const initialState: TournamentTableState = {
-  collection: [],
-};
+const tournamentTableAdapter = createEntityAdapter<TournamentTable>();
+const initialState = tournamentTableAdapter.getInitialState();
 
 const tournamentTableSlice = createSlice({
   name: 'tournamentTable',
   initialState,
   reducers: {
-    setTournamentTables: (state, action: PayloadAction<TournamentTable[]>) => {
-      state.collection = action.payload;
+    setTournamentTables: (state, action) => {
+      tournamentTableAdapter.setAll(state, action.payload);
     },
-    addTournamentTable: (state, action: PayloadAction<TournamentTable>) => {
-      state.collection.push(action.payload);
+    addTournamentTable: (state, action) => {
+      tournamentTableAdapter.addOne(state, action.payload);
     },
-    updateTournamentTable: (state, action: PayloadAction<TournamentTable>) => {
-      const index = state.collection.findIndex(
-        (t) => t.id === action.payload.id,
-      );
-      if (index !== -1) {
-        state.collection[index] = action.payload;
-      }
+    updateTournamentTable: (state, action) => {
+      tournamentTableAdapter.updateOne(state, {
+        id: action.payload.id,
+        changes: action.payload,
+      });
     },
-    deleteTournamentTable: (state, action: PayloadAction<number>) => {
-      state.collection = state.collection.filter(
-        (t) => t.id !== action.payload,
-      );
+    deleteTournamentTable: (state, action) => {
+      tournamentTableAdapter.removeOne(state, action.payload);
     },
   },
 });
@@ -41,5 +33,11 @@ export const {
   updateTournamentTable,
   deleteTournamentTable,
 } = tournamentTableSlice.actions;
+
+export const {
+  selectById: selectTournamentTableById,
+  selectIds: selectTournamentTableIds,
+  selectEntities: selectAllTournamentTables,
+} = tournamentTableAdapter.getSelectors((state: RootState) => state.tournamentTable);
 
 export default tournamentTableSlice.reducer;

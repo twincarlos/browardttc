@@ -1,32 +1,28 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, createEntityAdapter } from '@reduxjs/toolkit'
 import { TournamentPlayer } from '../../types/tournamentPlayerType'
+import { RootState } from '../index';
 
-interface TournamentPlayerState {
-  collection: TournamentPlayer[]
-}
-
-const initialState: TournamentPlayerState = {
-  collection: [],
-}
+const tournamentPlayerAdapter = createEntityAdapter<TournamentPlayer>();
+const initialState = tournamentPlayerAdapter.getInitialState();
 
 const tournamentPlayerSlice = createSlice({
   name: 'tournamentPlayer',
   initialState,
   reducers: {
-    setTournamentPlayers: (state, action: PayloadAction<TournamentPlayer[]>) => {
-      state.collection = action.payload
+    setTournamentPlayers: (state, action) => {
+      tournamentPlayerAdapter.setAll(state, action.payload)
     },
-    addTournamentPlayer: (state, action: PayloadAction<TournamentPlayer>) => {
-      state.collection.push(action.payload)
+    addTournamentPlayer: (state, action) => {
+      tournamentPlayerAdapter.addOne(state, action.payload)
     },
-    updateTournamentPlayer: (state, action: PayloadAction<TournamentPlayer>) => {
-      const index = state.collection.findIndex(t => t.id === action.payload.id)
-      if (index !== -1) {
-        state.collection[index] = action.payload
-      }
+    updateTournamentPlayer: (state, action) => {
+      tournamentPlayerAdapter.updateOne(state, {
+        id: action.payload.id,
+        changes: action.payload,
+      })
     },
-    deleteTournamentPlayer: (state, action: PayloadAction<number>) => {
-      state.collection = state.collection.filter(t => t.id !== action.payload)
+    deleteTournamentPlayer: (state, action) => {
+      tournamentPlayerAdapter.removeOne(state, action.payload)
     },
   },
 })
@@ -37,5 +33,11 @@ export const {
   updateTournamentPlayer,
   deleteTournamentPlayer,
 } = tournamentPlayerSlice.actions
+
+export const {
+  selectById: selectTournamentPlayerById,
+  selectIds: selectTournamentPlayerIds,
+  selectEntities: selectAllTournamentPlayers,
+} = tournamentPlayerAdapter.getSelectors((state: RootState) => state.tournamentPlayer);
 
 export default tournamentPlayerSlice.reducer

@@ -7,7 +7,7 @@ import './Tournament.css';
 export default function Tournament({ tournament }: { tournament: Tournament }) {
   return (
     <Card>
-      <div className="tournament f f-c">
+      <div className="tournament">
         <Status status={tournament.status} />
         <span className="tournament-name mt-1">{tournament.name}</span>
         {tournament.date && (

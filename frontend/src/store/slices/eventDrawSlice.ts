@@ -19,7 +19,7 @@ const eventDrawSlice = createSlice({
     updateEventDraw: (state, action: PayloadAction<EventDraw>) => {
       state.current = action.payload;
     },
-    deleteEventDraw: (state, action: PayloadAction<number>) => {
+    deleteEventDraw: (state) => {
       state.current = null;
     },
   },
