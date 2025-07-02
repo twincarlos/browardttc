@@ -1,0 +1,7 @@
+.tournament {
+    background: var(--background-tertiary);
+}
+
+.tournament-name {
+    font-weight: 600;
+}

@@ -1,0 +1,30 @@
+.status {
+  width: fit-content;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.status.upcoming {
+  border-color: #a2a2a2;
+  color: #a2a2a2;
+}
+
+.status.ready {
+  border-color: #b13bff;
+  color: #b13bff;
+}
+
+.status.in_progress {
+  border-color: #ff204e;
+  color: #ff204e;
+}
+
+.status.pending {
+  border-color: #ffaf00;
+  color: #ffaf00;
+}
+
+.status.finished {
+    border-color: #00FF9C;
+    color: #00FF9C;
+}

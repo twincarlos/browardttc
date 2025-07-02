@@ -6,9 +6,10 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #171d2c;
-    --foreground: #d9d9d9;
-
     --background-secondary: #1f2a46;
+    --background-tertiary: #323e5d;
+    
+    --foreground: #d9d9d9;
   }
 }
 
@@ -41,4 +42,79 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+/* Flex */
+.f {
+  display: flex;
+}
+.f-c {
+  flex-direction: column;
+}
+
+/* Gap */
+.g-1 {
+  gap: 0.25rem;
+}
+
+/* Margin */
+.m-1 {
+  margin: 0.25rem;
+}
+.m-2 {
+  margin: 0.5rem;
+}
+.m-3 {
+  margin: 1rem;
+}
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
+/* Border */
+.bs-s {
+  border-style: solid;
+}
+.bw-1 {
+  border-width: 1px;
+}
+.br-1 {
+  border-radius: 0.25rem;
+}
+.br-2 {
+  border-radius: 0.5rem;
+}
+.br-3 {
+  border-radius: 1rem;
+}
+
+/* Padding */
+.p-1 {
+  padding: 0.25rem;
+}
+.p-1-a {
+  padding: 0.25rem 0.5rem;
+}
+.p-2 {
+  padding: 0.5rem;
+}
+.p-2-a {
+  padding: 0.5rem 1rem;
+}
+.p-3 {
+  padding: 1rem;
+}
+.p-3-a {
+  padding: 1rem 2rem;
+}
+
+/* Font Size */
+.fs-xs {
+  font-size: 0.5rem;
+}
+.fs-sm {
+  font-size: 0.75rem;
+}
+.fs-md {
+  font-size: 1rem;
 }
