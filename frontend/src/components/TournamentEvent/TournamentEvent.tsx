@@ -1,8 +1,8 @@
 import './TournamentEvent.css';
+import formatDate from '@/utils/formatDate';
 import Card from '@/components/StyledComponents/Card/Card';
 import Status from '@/components/StyledComponents/Status/Status';
 import type { TournamentEvent as TournamentEventType } from '@/types/tournamentEventType';
-import formatDate from '@/utils/formatDate';
 
 export default function TournamentEvent({
   tournamentEvent,
