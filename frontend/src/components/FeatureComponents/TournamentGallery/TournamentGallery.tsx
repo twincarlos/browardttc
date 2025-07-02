@@ -1,21 +1,16 @@
-'use client';
+import Link from 'next/link';
 import Tournament from '../Tournament/Tournament';
-import { useAppSelector } from '@/hooks/useAppSelector';
 import Gallery from '@/components/StyledComponents/Gallery/Galery';
-import { useGetTournamentsQuery } from '@/store/apis/tournamentApi';
-import { selectAllTournaments } from '@/store/slices/tournamentSlice';
+import type { Tournament as TournamentType } from '@/types/tournamentType';
 
-export default function TournamentGallery() {
-  const { isLoading, error } = useGetTournamentsQuery();
-  const tournaments = useAppSelector(selectAllTournaments);
-
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {JSON.stringify(error)}</div>;
+export default function TournamentGallery({ tournaments }: { tournaments: TournamentType[] }) {
 
   return (
     <Gallery>
       {Object.values(tournaments).map((tournament) => (
-        <Tournament key={tournament.id} tournament={tournament} />
+        <Link key={tournament.id} href={`/${tournament.id}`}>
+          <Tournament tournament={tournament} />
+        </Link>
       ))}
     </Gallery>
   );

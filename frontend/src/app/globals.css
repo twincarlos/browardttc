@@ -44,6 +44,10 @@ a {
   }
 }
 
+button {
+  cursor: pointer;
+}
+
 /* Flex */
 .f {
   display: flex;
@@ -72,6 +76,9 @@ a {
 }
 
 /* Border */
+.b-n {
+  border: none;
+}
 .bs-s {
   border-style: solid;
 }
