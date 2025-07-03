@@ -28,13 +28,6 @@ const tournamentPlayerSlice = createSlice({
 })
 
 export const {
-  setTournamentPlayers,
-  addTournamentPlayer,
-  updateTournamentPlayer,
-  deleteTournamentPlayer,
-} = tournamentPlayerSlice.actions
-
-export const {
   selectById: selectTournamentPlayerById,
   selectIds: selectTournamentPlayerIds,
   selectEntities: selectAllTournamentPlayers,

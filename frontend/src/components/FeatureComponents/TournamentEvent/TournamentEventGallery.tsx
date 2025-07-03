@@ -1,11 +1,19 @@
 import TournamentEvent from './TournamentEvent';
 import { useAppSelector } from '@/hooks/useAppSelector';
 import Gallery from '@/components/StyledComponents/Gallery/Gallery';
+import { selectCurrentTournamentId } from '@/store/slices/tournamentSlice';
 import { selectAllTournamentEventsByTournamentId } from '@/store/slices/tournamentEventSlice';
 import { useGetTournamentEventsByTournamentIdQuery } from '@/store/apis/tournamentEventApi';
+import Link from 'next/link';
 
-export default function TournamentEventGallery({ tournamentId }: { tournamentId: string }) {
-  const { isLoading, error } = useGetTournamentEventsByTournamentIdQuery(tournamentId, { pollingInterval: 10000 });
+export default function TournamentEventGallery() {
+  const tournamentId = useAppSelector(selectCurrentTournamentId);
+  if (!tournamentId) return <div>No tournament selected</div>;
+
+  const { isLoading, error } = useGetTournamentEventsByTournamentIdQuery(
+    tournamentId.toString(),
+    { pollingInterval: 10000 },
+  );
   const tournamentEvents = useAppSelector(
     selectAllTournamentEventsByTournamentId,
   );
@@ -16,10 +24,12 @@ export default function TournamentEventGallery({ tournamentId }: { tournamentId:
   return (
     <Gallery>
       {Object.values(tournamentEvents).map((tournamentEvent) => (
-        <TournamentEvent
+        <Link
           key={tournamentEvent.id}
-          tournamentEvent={tournamentEvent}
-        />
+          href={`/${tournamentId}/${tournamentEvent.id}`}
+        >
+          <TournamentEvent tournamentEvent={tournamentEvent} />
+        </Link>
       ))}
     </Gallery>
   );
