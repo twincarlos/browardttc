@@ -1,5 +1,5 @@
-import { useGetTournamentsQuery } from '@/store/apis/tournamentApi';
 import { useAppSelector } from '../useAppSelector';
+import { useGetTournamentsQuery } from '@/store/apis/tournamentApi';
 import { selectAllTournaments } from '@/store/slices/tournamentSlice';
 
 export default function useTournaments() {

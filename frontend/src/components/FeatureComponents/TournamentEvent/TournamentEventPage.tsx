@@ -7,7 +7,7 @@ export default function TournamentEventPage({ tournamentId, tournamentEventId }:
     <>
       <TournamentEventHeader tournamentId={tournamentId} tournamentEventId={tournamentEventId} />
       <Main>
-        <TournamentEventTabs />
+        <TournamentEventTabs tournamentEventId={tournamentEventId} />
       </Main>
     </>
   );

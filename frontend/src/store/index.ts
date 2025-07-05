@@ -1,5 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { tournamentApi } from './apis/tournamentApi'
 import tournamentReducer from './slices/tournamentSlice'
 import tournamentEventReducer from './slices/tournamentEventSlice'
 import tournamentPlayerReducer from './slices/tournamentPlayerSlice'
@@ -13,7 +12,9 @@ import groupMatchReducer from './slices/groupMatchSlice'
 import drawMatchReducer from './slices/drawMatchSlice'
 import groupMatchTableReducer from './slices/groupMatchTableSlice'
 import drawMatchTableReducer from './slices/drawMatchTableSlice'
+import { tournamentApi } from './apis/tournamentApi'
 import { tournamentEventApi } from './apis/tournamentEventApi'
+import { eventGroupApi } from './apis/eventGroupApi'
 
 export const store = configureStore({
   reducer: {
@@ -32,9 +33,10 @@ export const store = configureStore({
     drawMatchTable: drawMatchTableReducer,
     [tournamentApi.reducerPath]: tournamentApi.reducer,
     [tournamentEventApi.reducerPath]: tournamentEventApi.reducer,
+    [eventGroupApi.reducerPath]: eventGroupApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(tournamentApi.middleware, tournamentEventApi.middleware),
+    getDefaultMiddleware().concat(tournamentApi.middleware, tournamentEventApi.middleware, eventGroupApi.middleware),
 })
 
 export type RootState = ReturnType<typeof store.getState>

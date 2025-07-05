@@ -27,17 +27,9 @@ const tournamentTableSlice = createSlice({
   },
 });
 
-export const {
-  setTournamentTables,
-  addTournamentTable,
-  updateTournamentTable,
-  deleteTournamentTable,
-} = tournamentTableSlice.actions;
-
-export const {
-  selectById: selectTournamentTableById,
-  selectIds: selectTournamentTableIds,
-  selectEntities: selectAllTournamentTables,
-} = tournamentTableAdapter.getSelectors((state: RootState) => state.tournamentTable);
+export const { selectById: selectTournamentTableById } =
+  tournamentTableAdapter.getSelectors(
+    (state: RootState) => state.tournamentTable,
+  );
 
 export default tournamentTableSlice.reducer;

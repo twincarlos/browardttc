@@ -1,7 +1,7 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import { TournamentEvent } from '../../types/tournamentEventType';
 import { tournamentEventApi } from '../apis/tournamentEventApi';
-import { RootState } from '../index';
+import { RootState } from '@/store/index';
 
 const tournamentEventAdapter = createEntityAdapter<TournamentEvent>();
 const initialState = tournamentEventAdapter.getInitialState();
@@ -50,7 +50,6 @@ const tournamentEventSlice = createSlice({
 
 export const {
   selectById: selectTournamentEventById,
-  selectIds: selectTournamentEventIdsByTournamentId,
   selectEntities: selectAllTournamentEventsByTournamentId,
 } = tournamentEventAdapter.getSelectors(
   (state: RootState) => state.tournamentEvent,

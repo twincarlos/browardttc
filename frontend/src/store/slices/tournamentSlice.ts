@@ -49,7 +49,6 @@ const tournamentSlice = createSlice({
 
 export const {
   selectById: selectTournamentById,
-  selectIds: selectTournamentIds,
   selectEntities: selectAllTournaments,
 } = tournamentsAdapter.getSelectors((state: RootState) => state.tournament);
 

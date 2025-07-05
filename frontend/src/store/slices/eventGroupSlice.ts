@@ -1,41 +1,58 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { EventGroup } from '../../types/eventGroupType'
+import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
+import { EventGroup } from '@/types/eventGroupType';
+import { eventGroupApi } from '../apis/eventGroupApi';
+import { RootState } from '@/store/index';
 
-interface EventGroupState {
-  collection: EventGroup[]
-}
-
-const initialState: EventGroupState = {
-  collection: [],
-}
+const eventGroupAdapter = createEntityAdapter<EventGroup>();
+const initialState = eventGroupAdapter.getInitialState();
 
 const eventGroupSlice = createSlice({
   name: 'eventGroup',
   initialState,
-  reducers: {
-    setEventGroups: (state, action: PayloadAction<EventGroup[]>) => {
-      state.collection = action.payload
-    },
-    addEventGroup: (state, action: PayloadAction<EventGroup>) => {
-      state.collection.push(action.payload)
-    },
-    updateEventGroup: (state, action: PayloadAction<EventGroup>) => {
-      const index = state.collection.findIndex(t => t.id === action.payload.id)
-      if (index !== -1) {
-        state.collection[index] = action.payload
-      }
-    },
-    deleteEventGroup: (state, action: PayloadAction<number>) => {
-      state.collection = state.collection.filter(t => t.id !== action.payload)
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      eventGroupApi.endpoints.getEventGroups.matchFulfilled,
+      (state, { payload }) => {
+        eventGroupAdapter.setAll(state, payload);
+      },
+    );
+    builder.addMatcher(
+      eventGroupApi.endpoints.getEventGroupsByTournamentId.matchFulfilled,
+      (state, { payload }) => {
+        eventGroupAdapter.setAll(state, payload);
+      },
+    );
+    builder.addMatcher(
+      eventGroupApi.endpoints.getEventGroupsByTournamentEventId.matchFulfilled,
+      (state, { payload }) => {
+        eventGroupAdapter.setAll(state, payload);
+      },
+    );
+    builder.addMatcher(
+      eventGroupApi.endpoints.createEventGroup.matchFulfilled,
+      (state, { payload }) => {
+        eventGroupAdapter.addOne(state, payload);
+      },
+    );
+    builder.addMatcher(
+      eventGroupApi.endpoints.updateEventGroup.matchFulfilled,
+      (state, { payload }) => {
+        eventGroupAdapter.updateOne(state, {
+          id: payload.id,
+          changes: payload,
+        });
+      },
+    );
+    builder.addMatcher(
+      eventGroupApi.endpoints.deleteEventGroup.matchFulfilled,
+      (state, { payload }) => {
+        eventGroupAdapter.removeOne(state, payload);
+      },
+    );
   },
-})
+});
 
-export const {
-  setEventGroups,
-  addEventGroup,
-  updateEventGroup,
-  deleteEventGroup,
-} = eventGroupSlice.actions
-
-export default eventGroupSlice.reducer
+export const { selectEntities: selectAllEventGroupsByTournamentEventId } =
+  eventGroupAdapter.getSelectors((state: RootState) => state.eventGroup);
+export default eventGroupSlice.reducer;
