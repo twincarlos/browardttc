@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import Tournament from './Tournament';
+import TournamentCard from './TournamentCard';
 import { useAppSelector } from '@/hooks/useAppSelector';
 import Gallery from '@/components/StyledComponents/Gallery/Gallery';
 import { useGetTournamentsQuery } from '@/store/apis/tournamentApi';
@@ -17,7 +17,7 @@ export default function TournamentGallery() {
     <Gallery>
       {Object.values(tournaments).map((tournament) => (
         <Link key={tournament.id} href={`/${tournament.id}`}>
-          <Tournament tournament={tournament} />
+          <TournamentCard tournament={tournament} />
         </Link>
       ))}
     </Gallery>

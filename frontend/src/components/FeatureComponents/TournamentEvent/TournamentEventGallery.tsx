@@ -1,4 +1,4 @@
-import TournamentEvent from './TournamentEvent';
+import TournamentEventCard from './TournamentEventCard';
 import { useAppSelector } from '@/hooks/useAppSelector';
 import Gallery from '@/components/StyledComponents/Gallery/Gallery';
 import { selectAllTournamentEventsByTournamentId } from '@/store/slices/tournamentEventSlice';
@@ -24,7 +24,7 @@ export default function TournamentEventGallery({ tournamentId }: { tournamentId:
           key={tournamentEvent.id}
           href={`/${tournamentId}/${tournamentEvent.id}`}
         >
-          <TournamentEvent tournamentEvent={tournamentEvent} />
+          <TournamentEventCard tournamentEvent={tournamentEvent} />
         </Link>
       ))}
     </Gallery>

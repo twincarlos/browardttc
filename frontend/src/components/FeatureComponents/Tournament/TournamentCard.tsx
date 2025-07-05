@@ -4,7 +4,7 @@ import type { Tournament } from '@/types/tournamentType';
 import Card from '@/components/StyledComponents/Card/Card';
 import Status from '@/components/StyledComponents/Status/Status';
 
-export default function Tournament({ tournament }: { tournament: Tournament }) {
+export default function TournamentCard({ tournament }: { tournament: Tournament }) {
   return (
     <Card>
       <div className="tournament">
