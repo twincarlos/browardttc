@@ -11,7 +11,7 @@ export const tournamentEventApi = createApi({
       query: (id) => `/${id}`,
     }),
     getTournamentEventsByTournamentId: builder.query<TournamentEvent[], string>({
-      query: (tournament_id) => `/?tournament_id=${tournament_id}`,
+      query: (tournament_id) => `?tournament_id=${tournament_id}`,
     }),
     createTournamentEvent: builder.mutation<TournamentEvent, TournamentEvent>({
       query: (tournament) => ({

@@ -15,6 +15,9 @@ import drawMatchTableReducer from './slices/drawMatchTableSlice'
 import { tournamentApi } from './apis/tournamentApi'
 import { tournamentEventApi } from './apis/tournamentEventApi'
 import { eventGroupApi } from './apis/eventGroupApi'
+import { tournamentPlayerApi } from './apis/tournamentPlayerApi'
+import { eventPlayerApi } from './apis/eventPlayerApi'
+import { groupPlayerApi } from './apis/groupPlayerApi'
 
 export const store = configureStore({
   reducer: {
@@ -34,9 +37,19 @@ export const store = configureStore({
     [tournamentApi.reducerPath]: tournamentApi.reducer,
     [tournamentEventApi.reducerPath]: tournamentEventApi.reducer,
     [eventGroupApi.reducerPath]: eventGroupApi.reducer,
+    [tournamentPlayerApi.reducerPath]: tournamentPlayerApi.reducer,
+    [eventPlayerApi.reducerPath]: eventPlayerApi.reducer,
+    [groupPlayerApi.reducerPath]: groupPlayerApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(tournamentApi.middleware, tournamentEventApi.middleware, eventGroupApi.middleware),
+    getDefaultMiddleware().concat(
+      tournamentApi.middleware, 
+      tournamentEventApi.middleware, 
+      eventGroupApi.middleware,
+      tournamentPlayerApi.middleware,
+      eventPlayerApi.middleware,
+      groupPlayerApi.middleware
+    ),
 })
 
 export type RootState = ReturnType<typeof store.getState>

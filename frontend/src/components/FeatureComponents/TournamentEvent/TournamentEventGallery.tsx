@@ -1,3 +1,4 @@
+'use client';
 import Link from 'next/link';
 import TournamentEventCard from './TournamentEventCard';
 import Gallery from '@/components/StyledComponents/Gallery/Gallery';

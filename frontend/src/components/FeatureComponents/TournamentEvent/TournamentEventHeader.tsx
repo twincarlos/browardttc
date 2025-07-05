@@ -1,3 +1,4 @@
+'use client';
 import Header from '@/components/StyledComponents/Header/Header';
 import useTournamentEvent from '@/hooks/TournamentEvent/useTournamentEvent';
 

@@ -1,13 +1,21 @@
 'use client';
-import { useAppSelector } from '@/hooks/useAppSelector';
-import { selectGroupPlayerById } from '@/store/slices/groupPlayerSlice';
 import './GroupPlayer.css';
+import type { GroupPlayer } from '@/types/groupPlayerType';
+import { useAppSelector } from '@/hooks/useAppSelector';
+import { selectEventPlayerById } from '@/store/slices/eventPlayerSlice';
+import EventPlayer from '../EventPlayer/EventPlayer';
 
 export default function GroupPlayer({
-  groupPlayerId,
+  groupPlayer,
 }: {
-  groupPlayerId: number;
+  groupPlayer: GroupPlayer;
 }) {
-  const groupPlayer = useAppSelector((state) => selectGroupPlayerById(state, groupPlayerId));
-  return <div className="group-player">{groupPlayer.id}</div>;
+  const eventPlayer = useAppSelector((state) =>
+    selectEventPlayerById(state, groupPlayer.event_player_id),
+  );
+  return (
+    <div className="group-player">
+      <EventPlayer eventPlayer={eventPlayer} />
+    </div>
+  );
 }

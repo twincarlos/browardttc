@@ -1,13 +1,15 @@
 'use client';
 import './EventPlayer.css';
+import type { EventPlayer } from '@/types/eventPlayerType';
 import { useAppSelector } from '@/hooks/useAppSelector';
-import { selectEventPlayerById } from '@/store/slices/eventPlayerSlice';
+import { selectTournamentPlayerById } from '@/store/slices/tournamentPlayerSlice';
+import TournamentPlayer from '../TournamentPlayer/TournamentPlayer';
 
-export default function EventPlayer({
-  eventPlayerId,
-}: {
-  eventPlayerId: number;
-}) {
-  const eventPlayer = useAppSelector((state) => selectEventPlayerById(state, eventPlayerId));
-  return <div className="event-player">{eventPlayer.id}</div>;
+export default function EventPlayer({ eventPlayer }: { eventPlayer: EventPlayer }) {
+  const tournamentPlayer = useAppSelector((state) =>
+    selectTournamentPlayerById(state, eventPlayer.tournament_player_id),
+  );
+  return <div className="event-player">
+    <TournamentPlayer tournamentPlayer={tournamentPlayer} />
+  </div>;
 }

@@ -11,10 +11,10 @@ export const eventGroupApi = createApi({
       query: () => '/',
     }),
     getEventGroupsByTournamentId: builder.query<EventGroup[], string>({
-      query: (tournamentId) => `/?tournament_id=${tournamentId}`,
+      query: (tournamentId) => `?tournament_id=${tournamentId}`,
     }),
     getEventGroupsByTournamentEventId: builder.query<EventGroup[], string>({
-      query: (tournamentEventId) => `/?tournament_event_id=${tournamentEventId}`,
+      query: (tournamentEventId) => `?tournament_event_id=${tournamentEventId}`,
     }),
     createEventGroup: builder.mutation<EventGroup, EventGroup>({
       query: (eventGroup) => ({

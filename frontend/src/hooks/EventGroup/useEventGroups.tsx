@@ -1,13 +1,42 @@
-import { useGetEventGroupsByTournamentEventIdQuery } from '@/store/apis/eventGroupApi';
 import { useAppSelector } from '../useAppSelector';
 import { selectAllEventGroupsByTournamentEventId } from '@/store/slices/eventGroupSlice';
+import { useGetEventGroupsByTournamentEventIdQuery } from '@/store/apis/eventGroupApi';
+import { useGetGroupPlayersByTournamentEventIdQuery } from '@/store/apis/groupPlayerApi';
+import { useGetEventPlayersByTournamentEventIdQuery } from '@/store/apis/eventPlayerApi';
+import { useGetTournamentPlayersByTournamentEventIdQuery } from '@/store/apis/tournamentPlayerApi';
 
 export default function useEventGroups(tournamentEventId: string) {
-  const { isLoading, error } = useGetEventGroupsByTournamentEventIdQuery(
-    tournamentEventId,
-    { pollingInterval: 10000 },
-  );
+  const {
+    isLoading: isTournamentPlayersLoading,
+    error: tournamentPlayersError,
+  } = useGetTournamentPlayersByTournamentEventIdQuery(tournamentEventId, {
+    pollingInterval: 10000,
+  });
+  const { isLoading: isEventPlayersLoading, error: eventPlayersError } =
+    useGetEventPlayersByTournamentEventIdQuery(tournamentEventId, {
+      pollingInterval: 10000,
+    });
+  const { isLoading: isGroupPlayersLoading, error: groupPlayersError } =
+    useGetGroupPlayersByTournamentEventIdQuery(tournamentEventId, {
+      pollingInterval: 10000,
+    });
+  const { isLoading: isEventGroupsLoading, error: eventGroupsError } =
+    useGetEventGroupsByTournamentEventIdQuery(tournamentEventId, {
+      pollingInterval: 10000,
+    });
   const eventGroups = useAppSelector(selectAllEventGroupsByTournamentEventId);
 
-  return { eventGroups, isLoading, error };
+  return {
+    eventGroups,
+    isLoading:
+      isTournamentPlayersLoading,
+      isEventPlayersLoading,
+      isGroupPlayersLoading,
+      isEventGroupsLoading,
+    error:
+      tournamentPlayersError,
+      eventPlayersError,
+      groupPlayersError,
+      eventGroupsError,
+  };
 }

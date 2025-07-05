@@ -1,5 +1,7 @@
+'use client';
 import Gallery from '@/components/StyledComponents/Gallery/Gallery';
 import useEventGroups from '@/hooks/EventGroup/useEventGroups';
+import EventGroupCard from './EventGroupCard';
 
 export default function EventGroupGallery({ tournamentEventId }: { tournamentEventId: string }) {
   const { eventGroups, isLoading, error } = useEventGroups(tournamentEventId);
@@ -9,7 +11,7 @@ export default function EventGroupGallery({ tournamentEventId }: { tournamentEve
 
   return <Gallery>
     {Object.values(eventGroups).map((eventGroup) => (
-        <p key={eventGroup.id}>{eventGroup.id}</p>
+        <EventGroupCard key={eventGroup.id} eventGroup={eventGroup} />
     ))}
   </Gallery>;
 }

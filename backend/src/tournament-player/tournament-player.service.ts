@@ -15,6 +15,10 @@ export class TournamentPlayerService {
     return this.tournamentPlayerRepository.findAllByTournamentId(tournament_id);
   }
 
+  findAllByTournamentEventId(tournament_event_id: number) {
+    return this.tournamentPlayerRepository.findAllByTournamentEventId(tournament_event_id);
+  }
+
   findOne(id: number) {
     return this.tournamentPlayerRepository.findOne(id);
   }

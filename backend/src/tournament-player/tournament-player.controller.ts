@@ -24,8 +24,18 @@ export class TournamentPlayerController {
   }
 
   @Get()
-  findAllByTournamentId(@Query('tournament_id') tournament_id: string) {
-    return this.tournamentPlayerService.findAllByTournamentId(+tournament_id);
+  findAllByTournamentId(
+    @Query('tournament_id') tournament_id: string,
+    @Query('tournament_event_id') tournament_event_id: string,
+  ) {
+    if (tournament_event_id) {
+      return this.tournamentPlayerService.findAllByTournamentEventId(
+        +tournament_event_id,
+      );
+    }
+    if (tournament_id) {
+      return this.tournamentPlayerService.findAllByTournamentId(+tournament_id);
+    }
   }
 
   @Get(':id')

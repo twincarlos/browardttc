@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreateTournamentPlayerDto } from './dto/create-tournament-player.dto';
-import { tournamentPlayer } from 'src/db/schema';
+import { eventPlayer, tournamentPlayer } from 'src/db/schema';
 import { db } from 'src';
 import { eq } from 'drizzle-orm';
 import { UpdateTournamentPlayerDto } from './dto/update-tournament-player.dto';
@@ -17,6 +17,19 @@ export class TournamentPlayerRepository {
       .select()
       .from(tournamentPlayer)
       .where(eq(tournamentPlayer.tournament_id, tournament_id));
+  }
+
+  async findAllByTournamentEventId(tournament_event_id: number) {
+    const rows = await db
+      .select({ tournamentPlayer })
+      .from(tournamentPlayer)
+      .innerJoin(
+        eventPlayer,
+        eq(tournamentPlayer.id, eventPlayer.tournament_player_id),
+      )
+      .where(eq(eventPlayer.tournament_event_id, tournament_event_id));
+
+    return rows.map((row) => row.tournamentPlayer);
   }
 
   async findOne(id: number) {

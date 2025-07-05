@@ -25,11 +25,12 @@ export class GroupPlayerRepository {
   }
 
   async findAllByTournamentEventId(tournament_event_id: number) {
-    return db
-      .select()
+    const rows = await db
+      .select({ groupPlayer })
       .from(groupPlayer)
       .innerJoin(eventGroup, eq(groupPlayer.event_group_id, eventGroup.id))
       .where(eq(eventGroup.tournament_event_id, tournament_event_id));
+    return rows.map((row) => row.groupPlayer);
   }
 
   async findOne(id: number) {
