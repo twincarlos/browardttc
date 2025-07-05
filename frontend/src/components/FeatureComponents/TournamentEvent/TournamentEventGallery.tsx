@@ -1,17 +1,13 @@
 import TournamentEvent from './TournamentEvent';
 import { useAppSelector } from '@/hooks/useAppSelector';
 import Gallery from '@/components/StyledComponents/Gallery/Gallery';
-import { selectCurrentTournamentId } from '@/store/slices/tournamentSlice';
 import { selectAllTournamentEventsByTournamentId } from '@/store/slices/tournamentEventSlice';
 import { useGetTournamentEventsByTournamentIdQuery } from '@/store/apis/tournamentEventApi';
 import Link from 'next/link';
 
-export default function TournamentEventGallery() {
-  const tournamentId = useAppSelector(selectCurrentTournamentId);
-  if (!tournamentId) return <div>No tournament selected</div>;
-
+export default function TournamentEventGallery({ tournamentId }: { tournamentId: string }) {
   const { isLoading, error } = useGetTournamentEventsByTournamentIdQuery(
-    tournamentId.toString(),
+    tournamentId,
     { pollingInterval: 10000 },
   );
   const tournamentEvents = useAppSelector(

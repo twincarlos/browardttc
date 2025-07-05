@@ -7,7 +7,7 @@ import { useParams } from 'next/navigation';
 import { useAppSelector } from '@/hooks/useAppSelector';
 import { selectTournamentEventById } from '@/store/slices/tournamentEventSlice';
 import { useGetTournamentQuery } from '@/store/apis/tournamentApi';
-import { selectCurrentTournament } from '@/store/slices/tournamentSlice';
+import { selectTournamentById } from '@/store/slices/tournamentSlice';
 
 export default function TournamentEventPage() {
   const { tournamentId, tournamentEventId } = useParams<{
@@ -16,7 +16,7 @@ export default function TournamentEventPage() {
   }>();
 
   const { isLoading: isTournamentLoading, error: tournamentError } = useGetTournamentQuery(tournamentId, { pollingInterval: 10000 });
-  const tournament = useAppSelector(selectCurrentTournament);
+  const tournament = useAppSelector((state) => selectTournamentById(state, +tournamentId));
 
   const { isLoading: isTournamentEventLoading, error: tournamentEventError } = useGetTournamentEventQuery(tournamentEventId, { pollingInterval: 10000 });
   const tournamentEvent = useAppSelector((state) => selectTournamentEventById(state, +tournamentEventId));
