@@ -1,18 +1,10 @@
-import TournamentEventCard from './TournamentEventCard';
-import { useAppSelector } from '@/hooks/useAppSelector';
-import Gallery from '@/components/StyledComponents/Gallery/Gallery';
-import { selectAllTournamentEventsByTournamentId } from '@/store/slices/tournamentEventSlice';
-import { useGetTournamentEventsByTournamentIdQuery } from '@/store/apis/tournamentEventApi';
 import Link from 'next/link';
+import TournamentEventCard from './TournamentEventCard';
+import Gallery from '@/components/StyledComponents/Gallery/Gallery';
+import useTournamentEvents from '@/hooks/TournamentEvent/useTournamentEvents';
 
 export default function TournamentEventGallery({ tournamentId }: { tournamentId: string }) {
-  const { isLoading, error } = useGetTournamentEventsByTournamentIdQuery(
-    tournamentId,
-    { pollingInterval: 10000 },
-  );
-  const tournamentEvents = useAppSelector(
-    selectAllTournamentEventsByTournamentId,
-  );
+  const { tournamentEvents, isLoading, error } = useTournamentEvents(tournamentId);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {JSON.stringify(error)}</div>;

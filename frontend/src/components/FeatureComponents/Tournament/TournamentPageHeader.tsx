@@ -1,22 +1,11 @@
 import Header from '@/components/StyledComponents/Header/Header';
-import { useGetTournamentQuery } from '@/store/apis/tournamentApi';
-import { useAppSelector } from '@/hooks/useAppSelector';
-import { selectTournamentById } from '@/store/slices/tournamentSlice';
+import useTournament from '@/hooks/Tournament/useTournament';
 
-export default function TournamentPageHeader({
-  tournamentId,
-}: {
-  tournamentId: string;
-}) {
-  const { isLoading: isTournamentLoading, error: tournamentError } =
-    useGetTournamentQuery(tournamentId, { pollingInterval: 10000 });
-  const tournament = useAppSelector((state) =>
-    selectTournamentById(state, +tournamentId),
-  );
+export default function TournamentPageHeader({ tournamentId }: { tournamentId: string }) {
+  const { tournament, isLoading, error } = useTournament(tournamentId);
 
-  if (isTournamentLoading) return <div>Loading...</div>;
-  if (tournamentError)
-    return <div>Error: {JSON.stringify(tournamentError)}</div>;
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {JSON.stringify(error)}</div>;
 
   if (!tournament) return <div>Tournament not found</div>;
   return <Header title={`Broward TTC | ${tournament.name}`} />;
