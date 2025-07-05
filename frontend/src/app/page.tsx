@@ -1,4 +1,4 @@
-import TournamentsPage from '@/components/FeatureComponents/Tournaments/TournamentsPage';
+import TournamentsPage from '@/components/FeatureComponents/Tournament/TournamentsPage';
 
 export default function TournamentsPageWrapper() {
   return <TournamentsPage />;
