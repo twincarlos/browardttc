@@ -1,47 +1,75 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { GroupMatch } from '../../types/groupMatchType'
+import {
+  createSlice,
+  createEntityAdapter,
+  createSelector,
+} from '@reduxjs/toolkit';
+import { GroupMatch } from '../../types/groupMatchType';
+import { groupMatchApi } from '../apis/groupMatchApi';
+import { RootState } from '../index';
 
-interface GroupMatchState {
-  collection: GroupMatch[]
-  current: GroupMatch | null
-}
-
-const initialState: GroupMatchState = {
-  collection: [],
-  current: null,
-}
+const groupMatchAdapter = createEntityAdapter<GroupMatch>();
+const initialState = groupMatchAdapter.getInitialState();
 
 const groupMatchSlice = createSlice({
   name: 'groupMatch',
   initialState,
-  reducers: {
-    setGroupMatches: (state, action: PayloadAction<GroupMatch[]>) => {
-      state.collection = action.payload
-    },
-    addGroupMatch: (state, action: PayloadAction<GroupMatch>) => {
-      state.collection.push(action.payload)
-    },
-    updateGroupMatch: (state, action: PayloadAction<GroupMatch>) => {
-      const index = state.collection.findIndex(t => t.id === action.payload.id)
-      if (index !== -1) {
-        state.collection[index] = action.payload
-      }
-    },
-    deleteGroupMatch: (state, action: PayloadAction<number>) => {
-      state.collection = state.collection.filter(t => t.id !== action.payload)
-    },
-    setGroupMatch: (state, action: PayloadAction<GroupMatch | null>) => {
-      state.current = action.payload
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      groupMatchApi.endpoints.getGroupMatches.matchFulfilled,
+      (state, { payload }) => {
+        groupMatchAdapter.setAll(state, payload);
+      },
+    );
+    builder.addMatcher(
+      groupMatchApi.endpoints.getGroupMatchesByTournamentId.matchFulfilled,
+      (state, { payload }) => {
+        groupMatchAdapter.setAll(state, payload);
+      },
+    );
+    builder.addMatcher(
+      groupMatchApi.endpoints.getGroupMatchesByTournamentEventId
+        .matchFulfilled,
+      (state, { payload }) => {
+        groupMatchAdapter.setAll(state, payload);
+      },
+    );
+    builder.addMatcher(
+      groupMatchApi.endpoints.getGroupMatchesByEventGroupId.matchFulfilled,
+      (state, { payload }) => {
+        groupMatchAdapter.setAll(state, payload);
+      },
+    );
+    builder.addMatcher(
+      groupMatchApi.endpoints.createGroupMatch.matchFulfilled,
+      (state, { payload }) => {
+        groupMatchAdapter.addOne(state, payload);
+      },
+    );
+    builder.addMatcher(
+      groupMatchApi.endpoints.updateGroupMatch.matchFulfilled,
+      (state, { payload }) => {
+        groupMatchAdapter.updateOne(state, {
+          id: payload.id,
+          changes: payload,
+        });
+      },
+    );
+    builder.addMatcher(
+      groupMatchApi.endpoints.deleteGroupMatch.matchFulfilled,
+      (state, { payload }) => {
+        groupMatchAdapter.removeOne(state, payload);
+      },
+    );
   },
-})
+});
 
-export const {
-  setGroupMatches,
-  addGroupMatch,
-  updateGroupMatch,
-  deleteGroupMatch,
-  setGroupMatch,
-} = groupMatchSlice.actions
+export const selectGroupMatchesByEventGroupId = (eventGroupId: number) =>
+  createSelector([selectAllGroupMatches], (groupMatches) =>
+    groupMatches.filter((gm) => gm.event_group_id === eventGroupId),
+  );
 
-export default groupMatchSlice.reducer
+export const { selectAll: selectAllGroupMatches } =
+  groupMatchAdapter.getSelectors((state: RootState) => state.groupMatch);
+
+export default groupMatchSlice.reducer;

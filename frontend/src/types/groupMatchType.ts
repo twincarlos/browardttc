@@ -2,6 +2,7 @@ export type GroupMatchStatus = 'upcoming' | 'ready' | 'in_progress' | 'pending' 
 
 export interface GroupMatch {
     id: number;
+    event_group_id: number;
     group_player1_id: number;
     group_player2_id: number;
     score?: string;

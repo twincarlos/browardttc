@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import {
   eventGroup,
   groupMatch,
-  groupPlayer,
   tournamentEvent,
 } from 'src/db/schema';
 import { db } from 'src';
@@ -21,18 +20,8 @@ export class GroupMatchRepository {
     return db
       .select()
       .from(groupMatch)
-      .innerJoin(
-        groupPlayer,
-        or(
-          eq(groupMatch.group_player1_id, groupPlayer.id),
-          eq(groupMatch.group_player2_id, groupPlayer.id),
-        ),
-      )
-      .innerJoin(eventGroup, eq(groupPlayer.event_group_id, eventGroup.id))
-      .innerJoin(
-        tournamentEvent,
-        eq(eventGroup.tournament_event_id, tournamentEvent.id),
-      )
+      .innerJoin(eventGroup, eq(groupMatch.event_group_id, eventGroup.id))
+      .innerJoin(tournamentEvent, eq(eventGroup.tournament_event_id, tournamentEvent.id))
       .where(eq(tournamentEvent.tournament_id, tournament_id));
   }
 
@@ -40,14 +29,7 @@ export class GroupMatchRepository {
     return db
       .select()
       .from(groupMatch)
-      .innerJoin(
-        groupPlayer,
-        or(
-          eq(groupMatch.group_player1_id, groupPlayer.id),
-          eq(groupMatch.group_player2_id, groupPlayer.id),
-        ),
-      )
-      .innerJoin(eventGroup, eq(groupPlayer.event_group_id, eventGroup.id))
+      .innerJoin(eventGroup, eq(groupMatch.event_group_id, eventGroup.id))
       .where(eq(eventGroup.tournament_event_id, tournament_event_id));
   }
 

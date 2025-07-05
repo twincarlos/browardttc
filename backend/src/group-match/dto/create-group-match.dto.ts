@@ -1,4 +1,5 @@
 export class CreateGroupMatchDto {
+  event_group_id: number;
   group_player1_id: number;
   group_player2_id: number;
   score?: string;

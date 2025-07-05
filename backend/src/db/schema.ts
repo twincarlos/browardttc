@@ -159,6 +159,9 @@ export const groupPlayer = pgTable('group_player', {
 
 export const groupMatch = pgTable('group_match', {
   id: serial('id').primaryKey(),
+  event_group_id: integer('event_group_id')
+    .notNull()
+    .references(() => eventGroup.id),
   group_player1_id: integer('group_player1_id')
     .notNull()
     .references(() => groupPlayer.id),
@@ -217,6 +220,9 @@ export const drawPlayer = pgTable('draw_player', {
 
 export const drawMatch = pgTable('draw_match', {
   id: serial('id').primaryKey(),
+  event_draw_id: integer('event_draw_id')
+    .notNull()
+    .references(() => eventDraw.id),
   draw_player1_id: integer('draw_player1_id').references(() => drawPlayer.id),
   draw_player2_id: integer('draw_player2_id').references(() => drawPlayer.id),
   has_bye: boolean('has_bye').notNull().default(false),

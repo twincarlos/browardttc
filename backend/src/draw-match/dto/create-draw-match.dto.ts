@@ -1,4 +1,5 @@
 export class CreateDrawMatchDto {
+  event_draw_id: number;
   draw_player1_id: number;
   draw_player2_id: number;
   has_bye: boolean;

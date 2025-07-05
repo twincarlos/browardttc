@@ -2,6 +2,7 @@ export type DrawMatchStatus = 'upcoming' | 'ready' | 'in_progress' | 'pending' |
 
 export interface DrawMatch {
     id: number;
+    event_draw_id: number;
     draw_player1_id?: number;
     draw_player2_id?: number;
     has_bye: boolean;
