@@ -1,9 +1,11 @@
+'use client';
 import { useAppSelector } from '../useAppSelector';
 import { selectAllEventGroupsByTournamentEventId } from '@/store/slices/eventGroupSlice';
 import { useGetEventGroupsByTournamentEventIdQuery } from '@/store/apis/eventGroupApi';
 import { useGetGroupPlayersByTournamentEventIdQuery } from '@/store/apis/groupPlayerApi';
 import { useGetEventPlayersByTournamentEventIdQuery } from '@/store/apis/eventPlayerApi';
 import { useGetTournamentPlayersByTournamentEventIdQuery } from '@/store/apis/tournamentPlayerApi';
+import { useGetGroupMatchesByTournamentEventIdQuery } from '@/store/apis/groupMatchApi';
 
 export default function useEventGroups(tournamentEventId: string) {
   const {
@@ -24,6 +26,10 @@ export default function useEventGroups(tournamentEventId: string) {
     useGetEventGroupsByTournamentEventIdQuery(tournamentEventId, {
       pollingInterval: 10000,
     });
+  const { isLoading: isGroupMatchesLoading, error: groupMatchesError } =
+    useGetGroupMatchesByTournamentEventIdQuery(tournamentEventId, {
+      pollingInterval: 10000,
+    });
   const eventGroups = useAppSelector(selectAllEventGroupsByTournamentEventId);
 
   return {
@@ -33,10 +39,12 @@ export default function useEventGroups(tournamentEventId: string) {
       isEventPlayersLoading,
       isGroupPlayersLoading,
       isEventGroupsLoading,
+      isGroupMatchesLoading,
     error:
       tournamentPlayersError,
       eventPlayersError,
       groupPlayersError,
       eventGroupsError,
+      groupMatchesError,
   };
 }

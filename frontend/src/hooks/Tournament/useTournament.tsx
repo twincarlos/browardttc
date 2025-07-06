@@ -1,6 +1,7 @@
+'use client';
+import { useAppSelector } from '../useAppSelector';
 import { useGetTournamentQuery } from '@/store/apis/tournamentApi';
 import { selectTournamentById } from '@/store/slices/tournamentSlice';
-import { useAppSelector } from '../useAppSelector';
 
 export default function useTournament(tournamentId: string) {
   const { isLoading, error } = useGetTournamentQuery(tournamentId, {

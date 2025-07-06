@@ -1,8 +1,9 @@
+'use client';
+import { useAppSelector } from '../useAppSelector';
+import { useGetTournamentQuery } from '@/store/apis/tournamentApi';
+import { selectTournamentById } from '@/store/slices/tournamentSlice';
 import { useGetTournamentEventQuery } from '@/store/apis/tournamentEventApi';
 import { selectTournamentEventById } from '@/store/slices/tournamentEventSlice';
-import { useAppSelector } from '../useAppSelector';
-import { selectTournamentById } from '@/store/slices/tournamentSlice';
-import { useGetTournamentQuery } from '@/store/apis/tournamentApi';
 
 export default function useTournamentEvent(tournamentId: string, tournamentEventId: string) {
   const { isLoading: isTournamentLoading, error: tournamentError } =

@@ -1,3 +1,4 @@
+'use client';
 import { useAppSelector } from '../useAppSelector';
 import { useGetTournamentsQuery } from '@/store/apis/tournamentApi';
 import { selectAllTournaments } from '@/store/slices/tournamentSlice';
