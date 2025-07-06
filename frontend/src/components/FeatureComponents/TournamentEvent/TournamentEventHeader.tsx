@@ -1,21 +1,14 @@
-'use client';
+import type { Tournament } from '@/types/tournamentType';
 import Header from '@/components/StyledComponents/Header/Header';
-import useTournamentEvent from '@/hooks/TournamentEvent/useTournamentEvent';
+import type { TournamentEvent } from '@/types/tournamentEventType';
 
 export default function TournamentEventHeader({
-  tournamentId,
-  tournamentEventId,
+  tournament,
+  tournamentEvent,
 }: {
-  tournamentId: string;
-  tournamentEventId: string;
+  tournament: Tournament;
+  tournamentEvent: TournamentEvent;
 }) {
-  const { tournament, tournamentEvent, isLoading, error } =
-    useTournamentEvent(tournamentId, tournamentEventId);
-
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {JSON.stringify(error)}</div>;
-  if (!tournament || !tournamentEvent)
-    return <div>Tournament or tournament event not found</div>;
 
   return <Header title={`${tournament.name} | ${tournamentEvent.name}`} />;
 }

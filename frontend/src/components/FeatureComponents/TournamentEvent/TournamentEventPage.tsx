@@ -1,13 +1,15 @@
 import Main from '@/components/StyledComponents/Main/Main';
 import TournamentEventHeader from './TournamentEventHeader';
 import TournamentEventTabs from './TournamentEventTabs';
+import type { Tournament } from '@/types/tournamentType';
+import type { TournamentEvent } from '@/types/tournamentEventType';
 
-export default function TournamentEventPage({ tournamentId, tournamentEventId }: { tournamentId: string, tournamentEventId: string }) {
+export default function TournamentEventPage({ tournament, tournamentEvent }: { tournament: Tournament, tournamentEvent: TournamentEvent }) {
   return (
     <>
-      <TournamentEventHeader tournamentId={tournamentId} tournamentEventId={tournamentEventId} />
+      <TournamentEventHeader tournament={tournament} tournamentEvent={tournamentEvent} />
       <Main>
-        <TournamentEventTabs tournamentEventId={tournamentEventId} />
+        <TournamentEventTabs tournamentEvent={tournamentEvent} />
       </Main>
     </>
   );

@@ -10,6 +10,7 @@ export default function TournamentEventGallery({ tournament }: { tournament: Tou
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {JSON.stringify(error)}</div>;
+  if (!tournamentEvents) return <div>No tournament events found</div>;
 
   return (
     <Gallery>
