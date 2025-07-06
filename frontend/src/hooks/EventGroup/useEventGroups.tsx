@@ -35,16 +35,16 @@ export default function useEventGroups(tournamentEventId: string) {
   return {
     eventGroups,
     isLoading:
-      isTournamentPlayersLoading,
-      isEventPlayersLoading,
-      isGroupPlayersLoading,
-      isEventGroupsLoading,
+      isTournamentPlayersLoading ||
+      isEventPlayersLoading ||
+      isGroupPlayersLoading ||
+      isEventGroupsLoading ||
       isGroupMatchesLoading,
     error:
-      tournamentPlayersError,
-      eventPlayersError,
-      groupPlayersError,
-      eventGroupsError,
+      tournamentPlayersError ||
+      eventPlayersError ||
+      groupPlayersError ||
+      eventGroupsError ||
       groupMatchesError,
   };
 }

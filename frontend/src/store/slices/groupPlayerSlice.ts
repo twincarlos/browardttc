@@ -69,7 +69,7 @@ export const selectGroupPlayersByEventGroupId = (eventGroupId: number) =>
     groupPlayers.filter((gp) => gp.event_group_id === eventGroupId),
   );
 
-export const { selectAll: selectAllGroupPlayers } =
+export const { selectAll: selectAllGroupPlayers, selectById: selectGroupPlayerById } =
   groupPlayerAdapter.getSelectors((state: RootState) => state.groupPlayer);
 
 export default groupPlayerSlice.reducer;
