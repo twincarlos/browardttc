@@ -1,5 +1,22 @@
 .score-set {
-    width: 100%;
     border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.score-set-item {
+    width: 100%;
+    border-right: 1px solid var(--border-color);
+}
+
+.score-set-item:last-child {
+    border-right: none;
+}
+
+.score {
+    height: 100%;
+    text-align: center;
+}
+
+.score:first-child {
     border-bottom: 1px solid var(--border-color);
 }

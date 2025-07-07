@@ -7,8 +7,8 @@ export default function Score({ score }: { score: MatchScore[] | undefined }) {
         <div className="score-set f jc-se">
             {score.map((set: MatchScore, index: number) => (
                 <div key={index} className="score-set-item f f-c">
-                    <span className="score">{set[0] ?? ''}</span>
-                    <span className="score">{set[1] ?? ''}</span>
+                    <span className="score p-1">{set[0] ?? ''}</span>
+                    <span className="score p-1">{set[1] ?? ''}</span>
                 </div>
             ))}
         </div>
