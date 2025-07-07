@@ -30,7 +30,7 @@ export default function GroupMatch({
         tournamentEvent={tournamentEvent}
         eventGroup={eventGroup}
       />
-      <div className="p-1">
+      <div>
         <GroupPlayer groupPlayer={groupPlayer1} />
         <Score score={groupMatch.score} />
         <GroupPlayer groupPlayer={groupPlayer2} />

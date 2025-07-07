@@ -62,6 +62,9 @@ button {
 .jc-sb {
   justify-content: space-between;
 }
+.jc-se {
+  justify-content: space-evenly;
+}
 .ai-fs {
   align-items: flex-start;
 }
