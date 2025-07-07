@@ -9,7 +9,7 @@ export default function GroupMatches({ eventGroup, tournamentEvent }: { eventGro
   const { groupMatches } = useGroupMatches(eventGroup.id);
 
   return (
-    <div className="f f-c g-1">
+    <div className="group-matches f f-c g-1">
       {groupMatches.map((groupMatch: GroupMatchType) => (
         <GroupMatch key={groupMatch.id} groupMatch={groupMatch} tournamentEvent={tournamentEvent} eventGroup={eventGroup} />
       ))}

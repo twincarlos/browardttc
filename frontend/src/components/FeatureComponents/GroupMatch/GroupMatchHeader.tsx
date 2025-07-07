@@ -14,12 +14,16 @@ export default function GroupMatchHeader({
   eventGroup: EventGroup;
 }) {
   return (
-    <div>
-      <span>{tournamentEvent.name} • Group {eventGroup.number}</span>
-      <div>
-        <span>{showDay(eventGroup.date)} • {formatTime(eventGroup.time)}</span>
-        <Status status={groupMatch.status} />
+    <div className="group-match-header f jc-sb ai-fs p-1">
+      <div className="f f-c fs-sm">
+        <span>
+          {tournamentEvent.name} • Group {eventGroup.number}
+        </span>
+        <span>
+          {showDay(eventGroup.date)} • {formatTime(eventGroup.time)}
+        </span>
       </div>
+      <Status status={groupMatch.status} />
     </div>
   );
 }

@@ -8,10 +8,12 @@
     --background: #171d2c;
     --background-secondary: #1f2a46;
     --background-tertiary: #323e5d;
+    --background-quaternary: #26324d;
+    --background-quinary: #313e5c;
     
     --foreground: #d9d9d9;
 
-    --border-color: #d9d9d9;
+    --border-color: #3e4c70;
   }
 }
 
@@ -57,6 +59,12 @@ button {
 .f-c {
   flex-direction: column;
 }
+.jc-sb {
+  justify-content: space-between;
+}
+.ai-fs {
+  align-items: flex-start;
+}
 
 /* Gap */
 .g-1 {
@@ -95,6 +103,9 @@ button {
 }
 .br-3 {
   border-radius: 1rem;
+}
+.bc-1 {
+  border-color: var(--border-color);
 }
 
 /* Padding */

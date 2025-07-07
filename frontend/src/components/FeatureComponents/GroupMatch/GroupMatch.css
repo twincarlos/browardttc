@@ -1,0 +1,8 @@
+.group-match {
+    background: var(--background-quinary);
+}
+
+.group-match-header {
+    background: var(--background);
+    border-radius: 0.25rem 0.25rem 0 0
+}
