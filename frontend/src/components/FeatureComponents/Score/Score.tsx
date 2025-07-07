@@ -1,16 +1,19 @@
+import { memo } from 'react';
 import './Score.css';
-import { MatchScore } from "../../../types/matchType";
+import { GameScore } from "../../../types/matchType";
 
-export default function Score({ score }: { score: MatchScore[] | undefined }) {
+function Score({ score }: { score: GameScore[] | undefined }) {
     if (!score) return null;
     return (
         <div className="score-set f jc-se">
-            {score.map((set: MatchScore, index: number) => (
+            {score.map((set: GameScore, index: number) => (
                 <div key={index} className="score-set-item f f-c">
-                    <span className="score p-1">{set[0] ?? ''}</span>
-                    <span className="score p-1">{set[1] ?? ''}</span>
+                    <span className="score p-1 ta-c">{set[0]}</span>
+                    <span className="score p-1 ta-c">{set[1]}</span>
                 </div>
             ))}
         </div>
     );
 }
+
+export default memo(Score);

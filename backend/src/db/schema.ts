@@ -166,7 +166,7 @@ export const groupMatch = pgTable('group_match', {
     .notNull()
     .references(() => groupPlayer.id),
   best_of: integer('best_of').notNull().default(5),
-  score: json('score'),
+  game_scores: json('game_scores'),
   winner_id: integer('winner_id').references(() => groupPlayer.id),
   sequence: integer('sequence').notNull(),
   status: matchStatusEnum('status').notNull().default('upcoming'),
@@ -225,7 +225,7 @@ export const drawMatch = pgTable('draw_match', {
   draw_player2_id: integer('draw_player2_id').references(() => drawPlayer.id),
   best_of: integer('best_of').notNull().default(5),
   has_bye: boolean('has_bye').notNull().default(false),
-  score: json('score'),
+  game_scores: json('game_scores'),
   winner_id: integer('winner_id').references(() => drawPlayer.id),
   status: matchStatusEnum('status').notNull().default('upcoming'),
   player1_ready: boolean('player1_ready').notNull().default(false),

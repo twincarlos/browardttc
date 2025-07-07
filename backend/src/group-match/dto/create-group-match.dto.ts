@@ -3,7 +3,7 @@ export class CreateGroupMatchDto {
   group_player1_id: number;
   group_player2_id: number;
   best_of: number;
-  score?: [number | null, number | null][];
+  game_scores?: [number | null, number | null][];
   winner_id?: number;
   sequence: number;
   status: 'upcoming' | 'in_progress' | 'finished';

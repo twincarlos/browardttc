@@ -1,10 +1,11 @@
+import { memo } from 'react';
 import Status from '@/components/StyledComponents/Status/Status';
 import { EventGroup } from '@/types/eventGroupType';
 import type { GroupMatch } from '@/types/groupMatchType';
 import type { TournamentEvent } from '@/types/tournamentEventType';
 import { showDay, formatTime } from '@/utils/formatDate';
 
-export default function GroupMatchHeader({
+function GroupMatchHeader({
   groupMatch,
   tournamentEvent,
   eventGroup,
@@ -27,3 +28,5 @@ export default function GroupMatchHeader({
     </div>
   );
 }
+
+export default memo(GroupMatchHeader);

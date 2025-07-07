@@ -59,11 +59,20 @@ button {
 .f-c {
   flex-direction: column;
 }
+.jc-c {
+  justify-content: center;
+}
 .jc-sb {
   justify-content: space-between;
 }
 .jc-se {
   justify-content: space-evenly;
+}
+.jc-sa {
+  justify-content: space-around;
+}
+.ai-c {
+  align-items: center;
 }
 .ai-fs {
   align-items: flex-start;
@@ -140,4 +149,23 @@ button {
 }
 .fs-md {
   font-size: 1rem;
+}
+.fs-lg {
+  font-size: 1.25rem;
+}
+.fs-xl {
+  font-size: 1.5rem;
+}
+
+/* Text */
+.ta-c {
+  text-align: center;
+}
+
+/* Width */
+.w-100 {
+  width: 100%;
+}
+.h-100 {
+  height: 100%;
 }

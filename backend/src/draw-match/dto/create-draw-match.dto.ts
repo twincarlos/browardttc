@@ -4,7 +4,7 @@ export class CreateDrawMatchDto {
   draw_player2_id: number;
   best_of: number;
   has_bye: boolean;
-  score?: [number | null, number | null][];
+  game_scores?: [number | null, number | null][];
   winner_id?: number;
   status: 'upcoming' | 'in_progress' | 'finished';
   player1_ready: boolean;
