@@ -26,10 +26,7 @@ export const eventStatusEnum = pgEnum('event_status', [
   'finished',
 ]);
 
-export const eventStageEnum = pgEnum('event_stage', [
-  'groups',
-  'draw'
-]);
+export const eventStageEnum = pgEnum('event_stage', ['groups', 'draw']);
 
 export const eventTypeEnum = pgEnum('event_type', [
   'singles',
@@ -168,6 +165,7 @@ export const groupMatch = pgTable('group_match', {
   group_player2_id: integer('group_player2_id')
     .notNull()
     .references(() => groupPlayer.id),
+  best_of: integer('best_of').notNull().default(5),
   score: json('score'),
   winner_id: integer('winner_id').references(() => groupPlayer.id),
   sequence: integer('sequence').notNull(),
@@ -225,6 +223,7 @@ export const drawMatch = pgTable('draw_match', {
     .references(() => eventDraw.id),
   draw_player1_id: integer('draw_player1_id').references(() => drawPlayer.id),
   draw_player2_id: integer('draw_player2_id').references(() => drawPlayer.id),
+  best_of: integer('best_of').notNull().default(5),
   has_bye: boolean('has_bye').notNull().default(false),
   score: json('score'),
   winner_id: integer('winner_id').references(() => drawPlayer.id),

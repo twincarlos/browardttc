@@ -2,8 +2,9 @@ export class CreateDrawMatchDto {
   event_draw_id: number;
   draw_player1_id: number;
   draw_player2_id: number;
+  best_of: number;
   has_bye: boolean;
-  score?: string;
+  score?: [number | null, number | null][];
   winner_id?: number;
   status: 'upcoming' | 'in_progress' | 'finished';
   player1_ready: boolean;

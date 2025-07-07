@@ -13,7 +13,7 @@ export default function EventGroupGallery({ tournamentEvent }: { tournamentEvent
 
   return <Gallery>
     {Object.values(eventGroups).map((eventGroup) => (
-        <EventGroupCard key={eventGroup.id} eventGroup={eventGroup} />
+        <EventGroupCard key={eventGroup.id} eventGroup={eventGroup} tournamentEvent={tournamentEvent} />
     ))}
   </Gallery>;
 }

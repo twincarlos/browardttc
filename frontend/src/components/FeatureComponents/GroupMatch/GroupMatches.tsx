@@ -3,14 +3,15 @@ import GroupMatch from './GroupMatch';
 import type { EventGroup } from '@/types/eventGroupType';
 import useGroupMatches from '@/hooks/GroupMatch/useGroupMatches';
 import type { GroupMatch as GroupMatchType } from '@/types/groupMatchType';
+import type { TournamentEvent } from '@/types/tournamentEventType';
 
-export default function GroupMatches({ eventGroup }: { eventGroup: EventGroup }) {
+export default function GroupMatches({ eventGroup, tournamentEvent }: { eventGroup: EventGroup, tournamentEvent: TournamentEvent }) {
   const { groupMatches } = useGroupMatches(eventGroup.id);
 
   return (
-    <div>
+    <div className="f f-c g-1">
       {groupMatches.map((groupMatch: GroupMatchType) => (
-        <GroupMatch key={groupMatch.id} groupMatch={groupMatch} />
+        <GroupMatch key={groupMatch.id} groupMatch={groupMatch} tournamentEvent={tournamentEvent} eventGroup={eventGroup} />
       ))}
     </div>
   );

@@ -2,7 +2,8 @@ export class CreateGroupMatchDto {
   event_group_id: number;
   group_player1_id: number;
   group_player2_id: number;
-  score?: string;
+  best_of: number;
+  score?: [number | null, number | null][];
   winner_id?: number;
   sequence: number;
   status: 'upcoming' | 'in_progress' | 'finished';
