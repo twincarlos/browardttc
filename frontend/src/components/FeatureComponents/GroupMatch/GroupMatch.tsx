@@ -40,12 +40,12 @@ export default function GroupMatch({
       />
       <div className="f">
         <div className="group-match-scores f f-c jc-sb">
-          <span className="group-match-score ta-c f jc-c ai-c fs-lg p-1">{matchScore.matchScore[0]}</span>
-          <span className="group-match-score ta-c f jc-c ai-c fs-lg p-1">{matchScore.matchScore[1]}</span>
+          <span className="group-match-score ta-c f jc-c ai-c fs-lg p-1 h-100 bb">{matchScore.matchScore[0]}</span>
+          <span className="group-match-score ta-c f jc-c ai-c fs-lg p-1 h-100">{matchScore.matchScore[1]}</span>
         </div>
-        <div className="group-match-content f f-c jc-sa">
+        <div className="group-match-content f f-c jc-sa bl">
           <GroupPlayer groupPlayer={groupPlayer1} />
-          <Score score={groupMatch.game_scores} />
+          <Score gameScores={groupMatch.game_scores} />
           <GroupPlayer groupPlayer={groupPlayer2} />
         </div>
       </div>

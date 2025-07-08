@@ -7,19 +7,10 @@
     border-radius: 0.25rem 0.25rem 0 0
 }
 
-.group-match-score {
-    height: 100%;
-}
-
-.group-match-score:first-child {
-    border-bottom: 1px solid var(--border-color);
-}
-
 .group-match-scores {
     width: 15%;
 }
 
 .group-match-content {
-    border-left: 1px solid var(--border-color);
     width: 85%;
 }

@@ -2,14 +2,14 @@ import { memo } from 'react';
 import './Score.css';
 import { GameScore } from "../../../types/matchType";
 
-function Score({ score }: { score: GameScore[] | undefined }) {
-    if (!score) return null;
+function Score({ gameScores }: { gameScores: GameScore[] | undefined }) {
+    if (!gameScores) return null;
     return (
-        <div className="score-set f jc-se">
-            {score.map((set: GameScore, index: number) => (
-                <div key={index} className="score-set-item f f-c">
-                    <span className="score p-1 ta-c">{set[0]}</span>
-                    <span className="score p-1 ta-c">{set[1]}</span>
+        <div className="game-scores f jc-se bb">
+            {gameScores.map((gameScore: GameScore, index: number) => (
+                <div key={index} className="game-score-container f f-c w-100 br">
+                    <span className="game-score p-1 ta-c h-100 bt">{gameScore[0]}</span>
+                    <span className="game-score p-1 ta-c h-100 bt">{gameScore[1]}</span>
                 </div>
             ))}
         </div>
