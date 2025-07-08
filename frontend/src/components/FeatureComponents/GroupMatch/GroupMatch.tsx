@@ -1,7 +1,8 @@
 'use client';
 import './GroupMatch.css';
 import { useMemo } from 'react';
-import Score from '../Score/Score';
+import GameScore from '../Score/GameScore';
+import MatchScore from '../Score/MatchScore';
 import GroupMatchHeader from './GroupMatchHeader';
 import { EventGroup } from '@/types/eventGroupType';
 import { determineMatchScore } from '@/utils/match';
@@ -26,7 +27,7 @@ export default function GroupMatch({
     groupMatch.group_player2_id,
   );
 
-  const matchScore = useMemo(() => 
+  const matchScoreInfo = useMemo(() => 
     determineMatchScore(groupMatch.game_scores, groupMatch.best_of),
     [groupMatch.game_scores, groupMatch.best_of]
   );
@@ -39,13 +40,10 @@ export default function GroupMatch({
         eventGroup={eventGroup}
       />
       <div className="f">
-        <div className="group-match-scores f f-c jc-sb">
-          <span className="group-match-score ta-c f jc-c ai-c fs-lg p-1 h-100 bb">{matchScore.matchScore[0]}</span>
-          <span className="group-match-score ta-c f jc-c ai-c fs-lg p-1 h-100">{matchScore.matchScore[1]}</span>
-        </div>
-        <div className="group-match-content f f-c jc-sa bl">
+        <MatchScore matchScore={matchScoreInfo.matchScore} />
+        <div className="group-match-content f f-c jc-sa bl w-100">
           <GroupPlayer groupPlayer={groupPlayer1} />
-          <Score gameScores={groupMatch.game_scores} />
+          <GameScore gameScores={groupMatch.game_scores} />
           <GroupPlayer groupPlayer={groupPlayer2} />
         </div>
       </div>
