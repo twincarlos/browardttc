@@ -14,7 +14,7 @@ export default function Tabs({ tabs }: { tabs: Tab[] }) {
     <div className="tabs">
       <div className="tabs-header f g-1">
         {tabs.map((tab) => (
-          <button className={`tab p-1-a br-1 ${activeTab === tab.label ? 'bs-s bw-1' : 'b-n'}`} key={tab.label} onClick={() => setActiveTab(tab.label)}>
+          <button className={`tab p-1-a bra bc-1 ${activeTab === tab.label ? 'b' : 'b-n'}`} key={tab.label} onClick={() => setActiveTab(tab.label)}>
             {tab.label}
           </button>
         ))}

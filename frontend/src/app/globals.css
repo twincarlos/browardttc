@@ -104,10 +104,13 @@ button {
 .b-n {
   border: none;
 }
-.br {
+.bra {
   border-radius: 0.25rem;
 }
 .bc-1 {
+  border-color: var(--foreground);
+}
+.bc-2 {
   border-color: var(--border-color);
 }
 .bt {
