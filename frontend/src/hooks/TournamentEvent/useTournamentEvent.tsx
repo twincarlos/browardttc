@@ -7,13 +7,17 @@ import { selectTournamentEventById } from '@/store/slices/tournamentEventSlice';
 
 export default function useTournamentEvent(tournamentId: string, tournamentEventId: string) {
   const { isLoading: isTournamentLoading, error: tournamentError } =
-    useGetTournamentQuery(tournamentId, { pollingInterval: 10000 });
+    useGetTournamentQuery(tournamentId, { 
+      // pollingInterval: 10000,
+    });
   const tournament = useAppSelector((state) =>
     selectTournamentById(state, +tournamentId),
   );
 
   const { isLoading: isTournamentEventLoading, error: tournamentEventError } =
-    useGetTournamentEventQuery(tournamentEventId, { pollingInterval: 10000 });
+    useGetTournamentEventQuery(tournamentEventId, {
+      // pollingInterval: 10000,
+    });
   const tournamentEvent = useAppSelector((state) =>
     selectTournamentEventById(state, +tournamentEventId),
   );

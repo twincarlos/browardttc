@@ -5,8 +5,9 @@ import { selectAllTournamentEventsByTournamentId } from '@/store/slices/tourname
 
 export default function useTournamentEvents(tournamentId: string) {
   const { isLoading, error } = useGetTournamentEventsByTournamentIdQuery(
-    tournamentId,
-    { pollingInterval: 10000 },
+    tournamentId, {
+    // pollingInterval: 10000,
+  },
   );
   const tournamentEvents = useAppSelector(
     selectAllTournamentEventsByTournamentId,
