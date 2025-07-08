@@ -32,7 +32,7 @@ export default function GroupMatch({
   );
 
   return (
-    <div className="group-match br-1 bs-s bw-1 bc-1">
+    <div className="group-match b br">
       <GroupMatchHeader
         groupMatch={groupMatch}
         tournamentEvent={tournamentEvent}
