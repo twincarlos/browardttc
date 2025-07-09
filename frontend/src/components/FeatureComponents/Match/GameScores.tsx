@@ -1,5 +1,4 @@
 import { memo } from 'react';
-import './Score.css';
 import type { GameScore } from "../../../types/matchType";
 
 function GameScores({ gameScores }: { gameScores: GameScore[] | undefined }) {

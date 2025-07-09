@@ -5,7 +5,10 @@ import { GroupPlayer } from "@/types/groupPlayerType";
 import { useAppSelector } from "@/hooks/useAppSelector";
 import { selectEventPlayerById } from "@/store/slices/eventPlayerSlice";
 
-export default function MatchPlayer({ matchPlayer }: { matchPlayer: GroupPlayer | DrawPlayer }) {
+export default function MatchPlayer({ matchPlayer }: { matchPlayer: GroupPlayer | DrawPlayer | undefined }) {
+    if (!matchPlayer) {
+        return null;
+    }
     const eventPlayer = useAppSelector((state) => selectEventPlayerById(state, matchPlayer.event_player_id));
     return (
         <div className="match-player">

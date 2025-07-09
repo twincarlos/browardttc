@@ -12,7 +12,7 @@ export default function MatchHeader({ tournamentEvent, stage, match }: { tournam
     const time = 'number' in stage ? stage.time : ('round' in match ? match.time : undefined);
 
     return (
-        <div className="match-header f jc-sb ai-fs p-1">
+        <div className="match-header f jc-sb ai-fs p-1 bb">
             <div className="f f-c fs-sm">
                 <span>
                     {tournamentEvent.name} • {stageInfo}
