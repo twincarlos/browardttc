@@ -1,0 +1,16 @@
+.match-scores {
+    width: 15%;
+}
+
+.game-score-container:last-child {
+    border-right: none;
+}
+
+.group-match {
+    background: var(--background-quinary);
+}
+
+.group-match-header {
+    background: var(--background);
+    border-radius: 0.25rem 0.25rem 0 0
+}

@@ -2,7 +2,7 @@ import { memo } from 'react';
 import './Score.css';
 import type { GameScore } from "../../../types/matchType";
 
-function GameScore({ gameScores }: { gameScores: GameScore[] | undefined }) {
+function GameScores({ gameScores }: { gameScores: GameScore[] | undefined }) {
     if (!gameScores) return null;
     return (
         <div className="game-scores f jc-se bb">
@@ -16,4 +16,4 @@ function GameScore({ gameScores }: { gameScores: GameScore[] | undefined }) {
     );
 }
 
-export default memo(GameScore);
+export default memo(GameScores);

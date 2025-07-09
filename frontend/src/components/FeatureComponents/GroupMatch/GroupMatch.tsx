@@ -1,8 +1,8 @@
 'use client';
 import './GroupMatch.css';
 import { useMemo } from 'react';
-import GameScore from '../Score/GameScore';
-import MatchScore from '../Score/MatchScore';
+import GameScore from '../Match/GameScores';
+import MatchScore from '../Match/MatchScore';
 import GroupMatchHeader from './GroupMatchHeader';
 import { EventGroup } from '@/types/eventGroupType';
 import { determineMatchScore } from '@/utils/match';
