@@ -5,26 +5,26 @@
 }
 
 .status.upcoming {
-  border-color: #a2a2a2;
-  color: #a2a2a2;
+  border-color: var(--status-upcoming);
+  color: var(--status-upcoming);
 }
 
 .status.ready {
-  border-color: #b13bff;
-  color: #b13bff;
+  border-color: var(--status-ready);
+  color: var(--status-ready);
 }
 
 .status.in_progress {
-  border-color: #ff204e;
-  color: #ff204e;
+  border-color: var(--status-in_progress);
+  color: var(--status-in_progress);
 }
 
 .status.pending {
-  border-color: #ffaf00;
-  color: #ffaf00;
+  border-color: var(--status-pending);
+  color: var(--status-pending);
 }
 
 .status.finished {
-    border-color: #00FF9C;
-    color: #00FF9C;
+  border-color: var(--status-finished);
+  color: var(--status-finished);
 }

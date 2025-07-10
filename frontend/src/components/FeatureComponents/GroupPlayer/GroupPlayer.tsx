@@ -1,12 +1,10 @@
 'use client';
-import { memo } from 'react';
-import './GroupPlayer.css';
-import type { GroupPlayer } from '@/types/groupPlayerType';
-import { useAppSelector } from '@/hooks/useAppSelector';
-import { selectEventPlayerById } from '@/store/slices/eventPlayerSlice';
 import EventPlayer from '../EventPlayer/EventPlayer';
+import { useAppSelector } from '@/hooks/useAppSelector';
+import type { GroupPlayer } from '@/types/groupPlayerType';
+import { selectEventPlayerById } from '@/store/slices/eventPlayerSlice';
 
-function GroupPlayer({
+export default function GroupPlayer({
   groupPlayer,
 }: {
   groupPlayer: GroupPlayer;
@@ -20,5 +18,3 @@ function GroupPlayer({
     </div>
   );
 }
-
-export default memo(GroupPlayer);
