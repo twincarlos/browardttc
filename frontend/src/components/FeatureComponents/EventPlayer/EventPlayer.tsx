@@ -13,9 +13,9 @@ export default function EventPlayer({
     selectTournamentPlayerById(state, eventPlayer.tournament_player_id),
   );
 
-  return (
-    <div className="event-player">
-      <TournamentPlayer tournamentPlayer={tournamentPlayer} />
-    </div>
-  );
+  if (!tournamentPlayer) {
+    return null;
+  }
+
+  return <TournamentPlayer tournamentPlayer={tournamentPlayer} />;
 }

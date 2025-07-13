@@ -10,15 +10,13 @@ export default function MatchPlayer({
 }: {
   matchPlayer: GroupPlayer | DrawPlayer | undefined;
 }) {
-  if (!matchPlayer) {
+  const eventPlayer = useAppSelector((state) =>
+    selectEventPlayerById(state, matchPlayer?.event_player_id || -1),
+  );
+
+  if (!eventPlayer) {
     return null;
   }
-  const eventPlayer = useAppSelector((state) =>
-    selectEventPlayerById(state, matchPlayer.event_player_id),
-  );
-  return (
-    <div className="match-player">
-      <EventPlayer eventPlayer={eventPlayer} />
-    </div>
-  );
+
+  return <EventPlayer eventPlayer={eventPlayer} />;
 }

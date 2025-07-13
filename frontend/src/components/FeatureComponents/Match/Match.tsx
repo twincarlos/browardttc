@@ -10,9 +10,8 @@ import type { DrawMatch } from '@/types/drawMatchType';
 import type { EventDraw } from '@/types/eventDrawType';
 import type { GroupMatch } from '@/types/groupMatchType';
 import type { EventGroup } from '@/types/eventGroupType';
-import type { GroupPlayer } from '@/types/groupPlayerType';
 import type { TournamentEvent } from '@/types/tournamentEventType';
-import useGetGroupPlayer from '@/hooks/GroupPlayer/useGetGroupPlayer';
+import useGetMatchPlayer from '@/hooks/MatchPlayer/useGetMatchPlayer';
 
 export default function Match({
   tournamentEvent,
@@ -28,14 +27,7 @@ export default function Match({
     [match.game_scores, match.best_of],
   );
 
-  const player1: { groupPlayer: GroupPlayer | undefined } =
-    'event_group_id' in match
-      ? useGetGroupPlayer(match.group_player1_id)
-      : { groupPlayer: undefined };
-  const player2: { groupPlayer: GroupPlayer | undefined } =
-    'event_group_id' in match
-      ? useGetGroupPlayer(match.group_player2_id)
-      : { groupPlayer: undefined };
+  const { player1, player2 } = useGetMatchPlayer(match);
 
   return (
     <div
@@ -50,9 +42,9 @@ export default function Match({
       <div className="f">
         <MatchScore matchScore={matchScoreInfo.matchScore} />
         <div className="match-content f f-c jc-sa bl w-100">
-          <MatchPlayer matchPlayer={player1?.groupPlayer} />
+          <MatchPlayer matchPlayer={player1} />
           <GameScores gameScores={match.game_scores} />
-          <MatchPlayer matchPlayer={player2?.groupPlayer} />
+          <MatchPlayer matchPlayer={player2} />
         </div>
       </div>
     </div>
