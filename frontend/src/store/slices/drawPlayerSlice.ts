@@ -1,41 +1,75 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { DrawPlayer } from '../../types/drawPlayerType'
+import {
+  createSlice,
+  createEntityAdapter,
+  createSelector,
+} from '@reduxjs/toolkit';
+import { DrawPlayer } from '../../types/drawPlayerType';
+import { drawPlayerApi } from '../apis/drawPlayerApi';
+import { RootState } from '../index';
 
-interface DrawPlayerState {
-  collection: DrawPlayer[]
-}
-
-const initialState: DrawPlayerState = {
-  collection: [],
-}
+const drawPlayerAdapter = createEntityAdapter<DrawPlayer>();
+const initialState = drawPlayerAdapter.getInitialState();
 
 const drawPlayerSlice = createSlice({
   name: 'drawPlayer',
   initialState,
-  reducers: {
-    setDrawPlayers: (state, action: PayloadAction<DrawPlayer[]>) => {
-      state.collection = action.payload
-    },
-    addDrawPlayer: (state, action: PayloadAction<DrawPlayer>) => {
-      state.collection.push(action.payload)
-    },
-    updateDrawPlayer: (state, action: PayloadAction<DrawPlayer>) => {
-      const index = state.collection.findIndex(t => t.id === action.payload.id)
-      if (index !== -1) {
-        state.collection[index] = action.payload
-      }
-    },
-    deleteDrawPlayer: (state, action: PayloadAction<number>) => {
-      state.collection = state.collection.filter(t => t.id !== action.payload)
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      drawPlayerApi.endpoints.getDrawPlayers.matchFulfilled,
+      (state, { payload }) => {
+        drawPlayerAdapter.setAll(state, payload);
+      },
+    );
+    builder.addMatcher(
+      drawPlayerApi.endpoints.getDrawPlayersByTournamentId.matchFulfilled,
+      (state, { payload }) => {
+        drawPlayerAdapter.setAll(state, payload);
+      },
+    );
+    builder.addMatcher(
+      drawPlayerApi.endpoints.getDrawPlayersByTournamentEventId
+        .matchFulfilled,
+      (state, { payload }) => {
+        drawPlayerAdapter.setAll(state, payload);
+      },
+    );
+    builder.addMatcher(
+      drawPlayerApi.endpoints.getDrawPlayersByEventDrawId.matchFulfilled,
+      (state, { payload }) => {
+        drawPlayerAdapter.setAll(state, payload);
+      },
+    );
+    builder.addMatcher(
+      drawPlayerApi.endpoints.createDrawPlayer.matchFulfilled,
+      (state, { payload }) => {
+        drawPlayerAdapter.addOne(state, payload);
+      },
+    );
+    builder.addMatcher(
+      drawPlayerApi.endpoints.updateDrawPlayer.matchFulfilled,
+      (state, { payload }) => {
+        drawPlayerAdapter.updateOne(state, {
+          id: payload.id,
+          changes: payload,
+        });
+      },
+    );
+    builder.addMatcher(
+      drawPlayerApi.endpoints.deleteDrawPlayer.matchFulfilled,
+      (state, { payload }) => {
+        drawPlayerAdapter.removeOne(state, payload);
+      },
+    );
   },
-})
+});
 
-export const {
-  setDrawPlayers,
-  addDrawPlayer,
-  updateDrawPlayer,
-  deleteDrawPlayer,
-} = drawPlayerSlice.actions
+export const selectDrawPlayersByEventDrawId = (eventDrawId: number) =>
+  createSelector([selectAllDrawPlayers], (drawPlayers) =>
+    drawPlayers.filter((gp) => gp.event_draw_id === eventDrawId),
+  );
 
-export default drawPlayerSlice.reducer 
+export const { selectAll: selectAllDrawPlayers, selectById: selectDrawPlayerById } =
+  drawPlayerAdapter.getSelectors((state: RootState) => state.drawPlayer);
+
+export default drawPlayerSlice.reducer;

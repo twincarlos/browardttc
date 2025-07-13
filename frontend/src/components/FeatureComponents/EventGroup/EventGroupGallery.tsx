@@ -1,8 +1,8 @@
 'use client';
-import Gallery from '@/components/StyledComponents/Gallery/Gallery';
-import useEventGroups from '@/hooks/EventGroup/useEventGroups';
 import EventGroupCard from './EventGroupCard';
+import useEventGroups from '@/hooks/EventGroup/useEventGroups';
 import type { TournamentEvent } from '@/types/tournamentEventType';
+import Gallery from '@/components/StyledComponents/Gallery/Gallery';
 
 export default function EventGroupGallery({
   tournamentEvent,

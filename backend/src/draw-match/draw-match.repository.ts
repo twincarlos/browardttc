@@ -26,11 +26,12 @@ export class DrawMatchRepository {
   }
 
   async findAllByTournamentEventId(tournament_event_id: number) {
-    return db
-      .select()
+    const rows = await db
+      .select({ drawMatch })
       .from(drawMatch)
       .innerJoin(eventDraw, eq(drawMatch.event_draw_id, eventDraw.id))
       .where(eq(eventDraw.tournament_event_id, tournament_event_id));
+    return rows.map((row) => row.drawMatch);
   }
 
   async findOne(id: number) {

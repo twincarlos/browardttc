@@ -25,8 +25,8 @@ export class DrawPlayerRepository {
   }
 
   async findAllByTournamentEventId(tournament_event_id: number) {
-    return db
-      .select()
+    const rows = await db
+      .select({ drawPlayer })
       .from(drawPlayer)
       .innerJoin(eventDraw, eq(drawPlayer.event_draw_id, eventDraw.id))
       .innerJoin(
@@ -34,6 +34,7 @@ export class DrawPlayerRepository {
         eq(eventDraw.tournament_event_id, tournamentEvent.id),
       )
       .where(eq(eventDraw.tournament_event_id, tournament_event_id));
+    return rows.map((row) => row.drawPlayer);
   }
 
   async findOne(id: number) {

@@ -14,22 +14,27 @@ export default function useEventGroups(tournamentEventId: string) {
   } = useGetTournamentPlayersByTournamentEventIdQuery(tournamentEventId, {
     // pollingInterval: 10000,
   });
+
   const { isLoading: isEventPlayersLoading, error: eventPlayersError } =
     useGetEventPlayersByTournamentEventIdQuery(tournamentEventId, {
       // pollingInterval: 10000,
     });
+
   const { isLoading: isGroupPlayersLoading, error: groupPlayersError } =
     useGetGroupPlayersByTournamentEventIdQuery(tournamentEventId, {
       // pollingInterval: 10000,
     });
+
   const { isLoading: isEventGroupsLoading, error: eventGroupsError } =
     useGetEventGroupsByTournamentEventIdQuery(tournamentEventId, {
       // pollingInterval: 10000,
     });
+
   const { isLoading: isGroupMatchesLoading, error: groupMatchesError } =
     useGetGroupMatchesByTournamentEventIdQuery(tournamentEventId, {
       // pollingInterval: 10000,
     });
+
   const eventGroups = useAppSelector(selectAllEventGroupsByTournamentEventId);
 
   return {

@@ -19,6 +19,9 @@ import { tournamentPlayerApi } from './apis/tournamentPlayerApi'
 import { eventPlayerApi } from './apis/eventPlayerApi'
 import { groupPlayerApi } from './apis/groupPlayerApi'
 import { groupMatchApi } from './apis/groupMatchApi'
+import { drawMatchApi } from './apis/drawMatchApi'
+import { drawPlayerApi } from './apis/drawPlayerApi'
+import { eventDrawApi } from './apis/eventDrawApi'
 
 export const store = configureStore({
   reducer: {
@@ -42,6 +45,9 @@ export const store = configureStore({
     [eventPlayerApi.reducerPath]: eventPlayerApi.reducer,
     [groupPlayerApi.reducerPath]: groupPlayerApi.reducer,
     [groupMatchApi.reducerPath]: groupMatchApi.reducer,
+    [drawMatchApi.reducerPath]: drawMatchApi.reducer,
+    [drawPlayerApi.reducerPath]: drawPlayerApi.reducer,
+    [eventDrawApi.reducerPath]: eventDrawApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
@@ -52,6 +58,9 @@ export const store = configureStore({
       eventPlayerApi.middleware,
       groupPlayerApi.middleware,
       groupMatchApi.middleware,
+      drawMatchApi.middleware,
+      drawPlayerApi.middleware,
+      eventDrawApi.middleware,
     ),
 })
 
