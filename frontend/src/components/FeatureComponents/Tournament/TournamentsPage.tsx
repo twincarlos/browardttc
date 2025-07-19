@@ -1,5 +1,5 @@
-import Main from '@/components/StyledComponents/Main/Main';
 import TournamentGallery from './TournamentGallery';
+import Main from '@/components/StyledComponents/Main/Main';
 import TournamentsPageHeader from './TournamentsPageHeader';
 
 export default function TournamentsPage() {

@@ -1,0 +1,8 @@
+.menu {
+    background: var(--background-tertiary);
+}
+
+.menu .menu-option .icon {
+    width: 0.75rem;
+    height: 0.75rem;
+}
