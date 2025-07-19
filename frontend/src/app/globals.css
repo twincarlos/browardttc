@@ -5,15 +5,14 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #171d2c;
-    --background-secondary: #1f2a46;
-    --background-tertiary: #323e5d;
-    --background-quaternary: #26324d;
-    --background-quinary: #313e5c;
+    --background: #191919;
+    --background-secondary: #212121;
+    --background-tertiary: #303030;
+    --background-quaternary: #505050;
     
-    --foreground: #d9d9d9;
+    --foreground: #dedede;
 
-    --border-color: #3e4c70;
+    --border-color: #dedede;
 
     --status-upcoming: #a2a2a2;
     --status-ready: #b13bff;
