@@ -1,25 +1,25 @@
-import Match from '../Match/Match';
-import { EventDraw } from '@/types/eventDrawType';
-import type { DrawMatch } from '@/types/drawMatchType';
-import { TournamentEvent } from '@/types/tournamentEventType';
+import DrawMatch from './DrawMatch';
+import type { EventDraw } from '@/types/eventDrawType';
+import type { TournamentEvent } from '@/types/tournamentEventType';
+import type { DrawMatch as DrawMatchType } from '@/types/drawMatchType';
 
 export default function DrawMatches({
   drawMatches,
   tournamentEvent,
   eventDraw,
 }: {
-  drawMatches: DrawMatch[];
+  drawMatches: DrawMatchType[];
   tournamentEvent: TournamentEvent;
   eventDraw: EventDraw;
 }) {
   return (
     <div>
       {drawMatches.map((drawMatch) => (
-        <Match
+        <DrawMatch
           key={drawMatch.id}
-          match={drawMatch}
           tournamentEvent={tournamentEvent}
-          stage={eventDraw}
+          eventDraw={eventDraw}
+          drawMatch={drawMatch}
         />
       ))}
     </div>

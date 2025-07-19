@@ -1,5 +1,5 @@
 'use client';
-import Match from '../Match/Match';
+import GroupMatch from './GroupMatch';
 import type { EventGroup } from '@/types/eventGroupType';
 import useGroupMatches from '@/hooks/GroupMatch/useGroupMatches';
 import type { TournamentEvent } from '@/types/tournamentEventType';
@@ -15,13 +15,13 @@ export default function GroupMatches({
   const { groupMatches } = useGroupMatches(eventGroup.id);
 
   return (
-    <div className="group-matches f f-c g-1">
+    <div className="group-matches f fd-c g-1">
       {groupMatches.map((groupMatch: GroupMatchType) => (
-        <Match
+        <GroupMatch
           key={groupMatch.id}
-          match={groupMatch}
           tournamentEvent={tournamentEvent}
-          stage={eventGroup}
+          eventGroup={eventGroup}
+          groupMatch={groupMatch}
         />
       ))}
     </div>

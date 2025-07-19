@@ -1,5 +1,4 @@
 import './EventGroup.css';
-import Card from '@/components/StyledComponents/Card/Card';
 import { EventGroup } from '@/types/eventGroupType';
 import GroupPlayers from '../GroupPlayer/GroupPlayers';
 import GroupMatches from '../GroupMatch/GroupMatches';
@@ -13,14 +12,9 @@ export default function EventGroupCard({
   tournamentEvent: TournamentEvent;
 }) {
   return (
-    <Card>
-      <div className="event-group">
-        <GroupPlayers eventGroup={eventGroup} />
-        <GroupMatches
-          eventGroup={eventGroup}
-          tournamentEvent={tournamentEvent}
-        />
-      </div>
-    </Card>
+    <div className="event-group bra p-1 f fd-c">
+      <GroupPlayers eventGroup={eventGroup} />
+      <GroupMatches eventGroup={eventGroup} tournamentEvent={tournamentEvent} />
+    </div>
   );
 }

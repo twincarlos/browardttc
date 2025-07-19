@@ -62,7 +62,7 @@ button {
 .f {
   display: flex;
 }
-.f-c {
+.fd-c {
   flex-direction: column;
 }
 .jc-c {
