@@ -10,3 +10,11 @@ export interface Tournament {
   created_at: string
   updated_at: string
 }
+
+export interface CreateTournamentDto {
+  name: string;
+  status: 'upcoming' | 'open' | 'closed' | 'in_progress' | 'finished';
+  registration_deadline?: string;
+  rating_cutoff?: string;
+  date?: string;
+}

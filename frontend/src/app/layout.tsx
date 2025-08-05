@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import Modal from "@/components/Modal/Modal";
+import { ToastContainer } from "react-toastify"; 
 import StoreProvider from "../store/StoreProvider";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ModalProvider } from "@/context/ModalContext";
@@ -30,6 +31,7 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <ModalProvider>
           <StoreProvider>
+            <ToastContainer />
             {children}
             <Modal />
           </StoreProvider>

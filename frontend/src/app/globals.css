@@ -60,6 +60,21 @@ button {
   cursor: pointer;
 }
 
+form {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
 /* Flex */
 .f {
   display: flex;
