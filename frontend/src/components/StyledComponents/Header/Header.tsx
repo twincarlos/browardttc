@@ -8,19 +8,24 @@ export default function Header({
   menu,
 }: {
   title: string;
-  menu: React.ReactNode;
+  menu?: React.ReactNode;
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <header className="ta-c">
       <h1>{title}</h1>
-      <div className="header-menu f fd-c ai-fe" onMouseLeave={() => setIsMenuOpen(false)}>
-        <button onMouseEnter={() => setIsMenuOpen(true)}>
-          <SettingsIcon />
-        </button>
-        {isMenuOpen && menu}
-      </div>
+      {menu && (
+        <div
+          className="header-menu f fd-c ai-fe"
+          onMouseLeave={() => setIsMenuOpen(false)}
+        >
+          <button onMouseEnter={() => setIsMenuOpen(true)}>
+            <SettingsIcon />
+          </button>
+          {isMenuOpen && menu}
+        </div>
+      )}
     </header>
   );
 }
