@@ -8,15 +8,15 @@ interface Option {
 
 export default function Menu({ options }: { options: Option[] }) {
   return (
-    <div className="menu p-2-a b bra f fd-c">
+    <div className="menu p-1 b bra f fd-c">
       {options.map((option) => (
         <button
           key={option.label}
           onClick={option.onClick}
-          className="menu-option f jc-sb ai-c g-1"
+          className="menu-option f jc-fs ai-c g-1 p-1 bra"
         >
           {option.icon}
-          {option.label}
+          <span>{option.label}</span>
         </button>
       ))}
     </div>

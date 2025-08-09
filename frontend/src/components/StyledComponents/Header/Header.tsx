@@ -10,7 +10,7 @@ export default function Header({
   title: string;
   menu?: React.ReactNode;
 }) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(true);
 
   return (
     <header className="ta-c">
@@ -18,7 +18,7 @@ export default function Header({
       {menu && (
         <div
           className="header-menu f fd-c ai-fe"
-          onMouseLeave={() => setIsMenuOpen(false)}
+          // onMouseLeave={() => setIsMenuOpen(false)}
         >
           <button onMouseEnter={() => setIsMenuOpen(true)}>
             <SettingsIcon />

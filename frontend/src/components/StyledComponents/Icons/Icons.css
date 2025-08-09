@@ -1,5 +1,9 @@
 .icon {
     width: 1rem;
     height: 1rem;
+    min-width: 1rem;
+    min-height: 1rem;
+    display: inline-block;
     fill: var(--foreground);
+    overflow: visible; /* prevent clipping within svg container */
 }
